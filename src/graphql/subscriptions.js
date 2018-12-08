@@ -1,8 +1,8 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateProfile = `subscription OnCreateProfile {
-  onCreateProfile {
+export const onCreateVcProfile = `subscription OnCreateVcProfile {
+  onCreateVCProfile {
     id
     firstName
     lastName
@@ -18,11 +18,18 @@ export const onCreateProfile = `subscription OnCreateProfile {
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const onUpdateProfile = `subscription OnUpdateProfile {
-  onUpdateProfile {
+export const onUpdateVcProfile = `subscription OnUpdateVcProfile {
+  onUpdateVCProfile {
     id
     firstName
     lastName
@@ -38,11 +45,18 @@ export const onUpdateProfile = `subscription OnUpdateProfile {
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const onDeleteProfile = `subscription OnDeleteProfile {
-  onDeleteProfile {
+export const onDeleteVcProfile = `subscription OnDeleteVcProfile {
+  onDeleteVCProfile {
     id
     firstName
     lastName
@@ -58,11 +72,18 @@ export const onDeleteProfile = `subscription OnDeleteProfile {
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const onCreateGroup = `subscription OnCreateGroup {
-  onCreateGroup {
+export const onCreateVcGroup = `subscription OnCreateVcGroup {
+  onCreateVCGroup {
     id
     name
     members {
@@ -89,8 +110,8 @@ export const onCreateGroup = `subscription OnCreateGroup {
   }
 }
 `;
-export const onUpdateGroup = `subscription OnUpdateGroup {
-  onUpdateGroup {
+export const onUpdateVcGroup = `subscription OnUpdateVcGroup {
+  onUpdateVCGroup {
     id
     name
     members {
@@ -117,8 +138,8 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
   }
 }
 `;
-export const onDeleteGroup = `subscription OnDeleteGroup {
-  onDeleteGroup {
+export const onDeleteVcGroup = `subscription OnDeleteVcGroup {
+  onDeleteVCGroup {
     id
     name
     members {
@@ -142,6 +163,171 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
       monthOfBirth
       yearOfBirth
     }
+  }
+}
+`;
+export const onCreateVcActivityList = `subscription OnCreateVcActivityList {
+  onCreateVCActivityList {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateVcActivityList = `subscription OnUpdateVcActivityList {
+  onUpdateVCActivityList {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteVcActivityList = `subscription OnDeleteVcActivityList {
+  onDeleteVCActivityList {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateVcActivitySchedule = `subscription OnCreateVcActivitySchedule {
+  onCreateVCActivitySchedule {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateVcActivitySchedule = `subscription OnUpdateVcActivitySchedule {
+  onUpdateVCActivitySchedule {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteVcActivitySchedule = `subscription OnDeleteVcActivitySchedule {
+  onDeleteVCActivitySchedule {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateVcActivityAttendance = `subscription OnCreateVcActivityAttendance {
+  onCreateVCActivityAttendance {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
+  }
+}
+`;
+export const onUpdateVcActivityAttendance = `subscription OnUpdateVcActivityAttendance {
+  onUpdateVCActivityAttendance {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
+  }
+}
+`;
+export const onDeleteVcActivityAttendance = `subscription OnDeleteVcActivityAttendance {
+  onDeleteVCActivityAttendance {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
   }
 }
 `;

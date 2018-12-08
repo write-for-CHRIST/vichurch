@@ -92,7 +92,7 @@
                 }
             }
         },
-        "ProfileTable": {
+        "VCProfileTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
                 "TableName": {
@@ -102,7 +102,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "Profile",
+                                    "VCProfile",
                                     {
                                         "Fn::GetAtt": [
                                             "GraphQLAPI",
@@ -119,7 +119,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "Profile",
+                                    "VCProfile",
                                     {
                                         "Fn::GetAtt": [
                                             "GraphQLAPI",
@@ -143,7 +143,7 @@
                         "AttributeType": "S"
                     },
                     {
-                        "AttributeName": "profileGroupId",
+                        "AttributeName": "vCProfileGroupId",
                         "AttributeType": "S"
                     }
                 ],
@@ -163,7 +163,7 @@
                         "IndexName": "gsi-GroupMembers",
                         "KeySchema": [
                             {
-                                "AttributeName": "profileGroupId",
+                                "AttributeName": "vCProfileGroupId",
                                 "KeyType": "HASH"
                             }
                         ],
@@ -182,7 +182,7 @@
                 ]
             }
         },
-        "ProfileIAMRole": {
+        "VCProfileIAMRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName": {
@@ -192,7 +192,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "ProfileTable",
+                                    "VCProfileTable",
                                     "role",
                                     {
                                         "Fn::GetAtt": [
@@ -210,7 +210,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "ProfileTable",
+                                    "VCProfileTable",
                                     "role",
                                     {
                                         "Fn::GetAtt": [
@@ -256,7 +256,7 @@
                                     "Resource": [
                                         {
                                             "Fn::GetAtt": [
-                                                "ProfileTable",
+                                                "VCProfileTable",
                                                 "Arn"
                                             ]
                                         },
@@ -266,7 +266,7 @@
                                                 [
                                                     {
                                                         "Fn::GetAtt": [
-                                                            "ProfileTable",
+                                                            "VCProfileTable",
                                                             "Arn"
                                                         ]
                                                     },
@@ -282,7 +282,7 @@
                 ]
             }
         },
-        "ProfileDataSource": {
+        "VCProfileDataSource": {
             "Type": "AWS::AppSync::DataSource",
             "Properties": {
                 "ApiId": {
@@ -291,11 +291,11 @@
                         "ApiId"
                     ]
                 },
-                "Name": "ProfileTable",
+                "Name": "VCProfileTable",
                 "Type": "AMAZON_DYNAMODB",
                 "ServiceRoleArn": {
                     "Fn::GetAtt": [
-                        "ProfileIAMRole",
+                        "VCProfileIAMRole",
                         "Arn"
                     ]
                 },
@@ -308,7 +308,7 @@
                                     ":",
                                     {
                                         "Fn::GetAtt": [
-                                            "ProfileTable",
+                                            "VCProfileTable",
                                             "Arn"
                                         ]
                                     }
@@ -317,13 +317,13 @@
                         ]
                     },
                     "TableName": {
-                        "Ref": "ProfileTable"
+                        "Ref": "VCProfileTable"
                     }
                 }
             },
-            "DependsOn": "ProfileIAMRole"
+            "DependsOn": "VCProfileIAMRole"
         },
-        "GetProfileResolver": {
+        "GetVCProfileResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -334,11 +334,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "getProfile",
+                "FieldName": "getVCProfile",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -360,7 +360,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getProfile",
+                                                    "getVCProfile",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -394,7 +394,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getProfile",
+                                                    "getVCProfile",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -411,7 +411,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ListProfileResolver": {
+        "ListVCProfileResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -422,11 +422,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "listProfiles",
+                "FieldName": "listVCProfiles",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -448,7 +448,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listProfiles",
+                                                    "listVCProfiles",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -482,7 +482,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listProfiles",
+                                                    "listVCProfiles",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -499,7 +499,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "CreateProfileResolver": {
+        "CreateVCProfileResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -510,11 +510,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "createProfile",
+                "FieldName": "createVCProfile",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -536,7 +536,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createProfile",
+                                                    "createVCProfile",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -570,7 +570,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createProfile",
+                                                    "createVCProfile",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -587,7 +587,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "UpdateProfileResolver": {
+        "UpdateVCProfileResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -598,11 +598,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "updateProfile",
+                "FieldName": "updateVCProfile",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -624,7 +624,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateProfile",
+                                                    "updateVCProfile",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -658,7 +658,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateProfile",
+                                                    "updateVCProfile",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -675,7 +675,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "DeleteProfileResolver": {
+        "DeleteVCProfileResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -686,11 +686,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "deleteProfile",
+                "FieldName": "deleteVCProfile",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -712,7 +712,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteProfile",
+                                                    "deleteVCProfile",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -746,7 +746,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteProfile",
+                                                    "deleteVCProfile",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -763,7 +763,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "GroupTable": {
+        "VCGroupTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
                 "TableName": {
@@ -773,7 +773,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "Group",
+                                    "VCGroup",
                                     {
                                         "Fn::GetAtt": [
                                             "GraphQLAPI",
@@ -790,7 +790,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "Group",
+                                    "VCGroup",
                                     {
                                         "Fn::GetAtt": [
                                             "GraphQLAPI",
@@ -827,7 +827,7 @@
                 }
             }
         },
-        "GroupIAMRole": {
+        "VCGroupIAMRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName": {
@@ -837,7 +837,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "GroupTable",
+                                    "VCGroupTable",
                                     "role",
                                     {
                                         "Fn::GetAtt": [
@@ -855,7 +855,7 @@
                             "Fn::Join": [
                                 "-",
                                 [
-                                    "GroupTable",
+                                    "VCGroupTable",
                                     "role",
                                     {
                                         "Fn::GetAtt": [
@@ -901,7 +901,7 @@
                                     "Resource": [
                                         {
                                             "Fn::GetAtt": [
-                                                "GroupTable",
+                                                "VCGroupTable",
                                                 "Arn"
                                             ]
                                         },
@@ -911,7 +911,7 @@
                                                 [
                                                     {
                                                         "Fn::GetAtt": [
-                                                            "GroupTable",
+                                                            "VCGroupTable",
                                                             "Arn"
                                                         ]
                                                     },
@@ -927,7 +927,7 @@
                 ]
             }
         },
-        "GroupDataSource": {
+        "VCGroupDataSource": {
             "Type": "AWS::AppSync::DataSource",
             "Properties": {
                 "ApiId": {
@@ -936,11 +936,11 @@
                         "ApiId"
                     ]
                 },
-                "Name": "GroupTable",
+                "Name": "VCGroupTable",
                 "Type": "AMAZON_DYNAMODB",
                 "ServiceRoleArn": {
                     "Fn::GetAtt": [
-                        "GroupIAMRole",
+                        "VCGroupIAMRole",
                         "Arn"
                     ]
                 },
@@ -953,7 +953,7 @@
                                     ":",
                                     {
                                         "Fn::GetAtt": [
-                                            "GroupTable",
+                                            "VCGroupTable",
                                             "Arn"
                                         ]
                                     }
@@ -962,13 +962,13 @@
                         ]
                     },
                     "TableName": {
-                        "Ref": "GroupTable"
+                        "Ref": "VCGroupTable"
                     }
                 }
             },
-            "DependsOn": "GroupIAMRole"
+            "DependsOn": "VCGroupIAMRole"
         },
-        "GetGroupResolver": {
+        "GetVCGroupResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -979,11 +979,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "getGroup",
+                "FieldName": "getVCGroup",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1005,7 +1005,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getGroup",
+                                                    "getVCGroup",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1039,7 +1039,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getGroup",
+                                                    "getVCGroup",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1056,7 +1056,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ListGroupResolver": {
+        "ListVCGroupResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1067,11 +1067,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "listGroups",
+                "FieldName": "listVCGroups",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1093,7 +1093,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listGroups",
+                                                    "listVCGroups",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1127,7 +1127,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listGroups",
+                                                    "listVCGroups",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1144,7 +1144,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "CreateGroupResolver": {
+        "CreateVCGroupResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1155,11 +1155,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "createGroup",
+                "FieldName": "createVCGroup",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1181,7 +1181,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createGroup",
+                                                    "createVCGroup",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1215,7 +1215,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createGroup",
+                                                    "createVCGroup",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1232,7 +1232,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "UpdateGroupResolver": {
+        "UpdateVCGroupResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1243,11 +1243,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "updateGroup",
+                "FieldName": "updateVCGroup",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1269,7 +1269,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateGroup",
+                                                    "updateVCGroup",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1303,7 +1303,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateGroup",
+                                                    "updateVCGroup",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1320,7 +1320,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "DeleteGroupResolver": {
+        "DeleteVCGroupResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1331,11 +1331,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "deleteGroup",
+                "FieldName": "deleteVCGroup",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1357,7 +1357,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteGroup",
+                                                    "deleteVCGroup",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1391,7 +1391,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteGroup",
+                                                    "deleteVCGroup",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1408,7 +1408,212 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ProfilegroupResolver": {
+        "VCActivityListTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityList",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityList",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "KeySchema": [
+                    {
+                        "AttributeName": "id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "id",
+                        "AttributeType": "S"
+                    }
+                ],
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "WriteCapacityUnits": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    }
+                },
+                "StreamSpecification": {
+                    "StreamViewType": "NEW_AND_OLD_IMAGES"
+                }
+            }
+        },
+        "VCActivityListIAMRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityListTable",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityListTable",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "appsync.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": "DynamoDBAccess",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
+                                        "dynamodb:PutItem",
+                                        "dynamodb:DeleteItem",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:Scan",
+                                        "dynamodb:Query",
+                                        "dynamodb:UpdateItem"
+                                    ],
+                                    "Resource": [
+                                        {
+                                            "Fn::GetAtt": [
+                                                "VCActivityListTable",
+                                                "Arn"
+                                            ]
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                "/",
+                                                [
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "VCActivityListTable",
+                                                            "Arn"
+                                                        ]
+                                                    },
+                                                    "*"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "VCActivityListDataSource": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "VCActivityListTable",
+                "Type": "AMAZON_DYNAMODB",
+                "ServiceRoleArn": {
+                    "Fn::GetAtt": [
+                        "VCActivityListIAMRole",
+                        "Arn"
+                    ]
+                },
+                "DynamoDBConfig": {
+                    "AwsRegion": {
+                        "Fn::Select": [
+                            3,
+                            {
+                                "Fn::Split": [
+                                    ":",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "VCActivityListTable",
+                                            "Arn"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "TableName": {
+                        "Ref": "VCActivityListTable"
+                    }
+                }
+            },
+            "DependsOn": "VCActivityListIAMRole"
+        },
+        "GetVCActivityListResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1419,12 +1624,1818 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "getVCActivityList",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivityList",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivityList",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "ListVCActivityListResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "listVCActivityLists",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivityLists",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivityLists",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "CreateVCActivityListResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "createVCActivityList",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivityList",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivityList",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "UpdateVCActivityListResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "updateVCActivityList",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivityList",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivityList",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "DeleteVCActivityListResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "deleteVCActivityList",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivityList",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivityList",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityScheduleTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivitySchedule",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivitySchedule",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "KeySchema": [
+                    {
+                        "AttributeName": "id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "id",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "vCActivityScheduleActivityId",
+                        "AttributeType": "S"
+                    }
+                ],
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "WriteCapacityUnits": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    }
+                },
+                "StreamSpecification": {
+                    "StreamViewType": "NEW_AND_OLD_IMAGES"
+                },
+                "GlobalSecondaryIndexes": [
+                    {
+                        "IndexName": "gsi-ActivitySchedule",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "vCActivityScheduleActivityId",
+                                "KeyType": "HASH"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        },
+                        "ProvisionedThroughput": {
+                            "ReadCapacityUnits": {
+                                "Ref": "DynamoDBModelTableReadIOPS"
+                            },
+                            "WriteCapacityUnits": {
+                                "Ref": "DynamoDBModelTableWriteIOPS"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "VCActivityScheduleIAMRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityScheduleTab",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityScheduleTable",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "appsync.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": "DynamoDBAccess",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
+                                        "dynamodb:PutItem",
+                                        "dynamodb:DeleteItem",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:Scan",
+                                        "dynamodb:Query",
+                                        "dynamodb:UpdateItem"
+                                    ],
+                                    "Resource": [
+                                        {
+                                            "Fn::GetAtt": [
+                                                "VCActivityScheduleTable",
+                                                "Arn"
+                                            ]
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                "/",
+                                                [
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "VCActivityScheduleTable",
+                                                            "Arn"
+                                                        ]
+                                                    },
+                                                    "*"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "VCActivityScheduleDataSource": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "VCActivityScheduleTable",
+                "Type": "AMAZON_DYNAMODB",
+                "ServiceRoleArn": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleIAMRole",
+                        "Arn"
+                    ]
+                },
+                "DynamoDBConfig": {
+                    "AwsRegion": {
+                        "Fn::Select": [
+                            3,
+                            {
+                                "Fn::Split": [
+                                    ":",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "VCActivityScheduleTable",
+                                            "Arn"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "TableName": {
+                        "Ref": "VCActivityScheduleTable"
+                    }
+                }
+            },
+            "DependsOn": "VCActivityScheduleIAMRole"
+        },
+        "GetVCActivityScheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "getVCActivitySchedule",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivitySchedule",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivitySchedule",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "ListVCActivityScheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "listVCActivitySchedules",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivitySchedules",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivitySchedules",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "CreateVCActivityScheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "createVCActivitySchedule",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivitySchedule",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivitySchedule",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "UpdateVCActivityScheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "updateVCActivitySchedule",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivitySchedule",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivitySchedule",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "DeleteVCActivityScheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "deleteVCActivitySchedule",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivitySchedule",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivitySchedule",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityAttendanceTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityAttendance",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityAttendance",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "KeySchema": [
+                    {
+                        "AttributeName": "id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "id",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "vCActivityAttendanceScheduleId",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "vCActivityAttendanceMemberId",
+                        "AttributeType": "S"
+                    }
+                ],
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "WriteCapacityUnits": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    }
+                },
+                "StreamSpecification": {
+                    "StreamViewType": "NEW_AND_OLD_IMAGES"
+                },
+                "GlobalSecondaryIndexes": [
+                    {
+                        "IndexName": "gsi-ScheduleAttendance",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "vCActivityAttendanceScheduleId",
+                                "KeyType": "HASH"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        },
+                        "ProvisionedThroughput": {
+                            "ReadCapacityUnits": {
+                                "Ref": "DynamoDBModelTableReadIOPS"
+                            },
+                            "WriteCapacityUnits": {
+                                "Ref": "DynamoDBModelTableWriteIOPS"
+                            }
+                        }
+                    },
+                    {
+                        "IndexName": "gsi-ProfileAttendance",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "vCActivityAttendanceMemberId",
+                                "KeyType": "HASH"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        },
+                        "ProvisionedThroughput": {
+                            "ReadCapacityUnits": {
+                                "Ref": "DynamoDBModelTableReadIOPS"
+                            },
+                            "WriteCapacityUnits": {
+                                "Ref": "DynamoDBModelTableWriteIOPS"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "VCActivityAttendanceIAMRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityAttendanceT",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "VCActivityAttendanceTable",
+                                    "role",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "appsync.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": "DynamoDBAccess",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
+                                        "dynamodb:PutItem",
+                                        "dynamodb:DeleteItem",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:Scan",
+                                        "dynamodb:Query",
+                                        "dynamodb:UpdateItem"
+                                    ],
+                                    "Resource": [
+                                        {
+                                            "Fn::GetAtt": [
+                                                "VCActivityAttendanceTable",
+                                                "Arn"
+                                            ]
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                "/",
+                                                [
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "VCActivityAttendanceTable",
+                                                            "Arn"
+                                                        ]
+                                                    },
+                                                    "*"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "VCActivityAttendanceDataSource": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "VCActivityAttendanceTable",
+                "Type": "AMAZON_DYNAMODB",
+                "ServiceRoleArn": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceIAMRole",
+                        "Arn"
+                    ]
+                },
+                "DynamoDBConfig": {
+                    "AwsRegion": {
+                        "Fn::Select": [
+                            3,
+                            {
+                                "Fn::Split": [
+                                    ":",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "VCActivityAttendanceTable",
+                                            "Arn"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "TableName": {
+                        "Ref": "VCActivityAttendanceTable"
+                    }
+                }
+            },
+            "DependsOn": "VCActivityAttendanceIAMRole"
+        },
+        "GetVCActivityAttendanceResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "getVCActivityAttendance",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivityAttendance",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "getVCActivityAttendance",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "ListVCActivityAttendanceResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "listVCActivityAttendances",
+                "TypeName": "Query",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivityAttendances",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Query",
+                                                    "listVCActivityAttendances",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "CreateVCActivityAttendanceResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "createVCActivityAttendance",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivityAttendance",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "createVCActivityAttendance",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "UpdateVCActivityAttendanceResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "updateVCActivityAttendance",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivityAttendance",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "updateVCActivityAttendance",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "DeleteVCActivityAttendanceResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "deleteVCActivityAttendance",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivityAttendance",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "Mutation",
+                                                    "deleteVCActivityAttendance",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCProfilegroupResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
                 "FieldName": "group",
-                "TypeName": "Profile",
+                "TypeName": "VCProfile",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
                         "",
@@ -1444,7 +3455,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Profile",
+                                                    "VCProfile",
                                                     "group",
                                                     "request",
                                                     {
@@ -1478,7 +3489,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Profile",
+                                                    "VCProfile",
                                                     "group",
                                                     "response",
                                                     {
@@ -1496,7 +3507,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ProfileleaderResolver": {
+        "VCProfileleaderResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1507,12 +3518,12 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "GroupDataSource",
+                        "VCGroupDataSource",
                         "Name"
                     ]
                 },
                 "FieldName": "leader",
-                "TypeName": "Profile",
+                "TypeName": "VCProfile",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
                         "",
@@ -1532,7 +3543,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Profile",
+                                                    "VCProfile",
                                                     "leader",
                                                     "request",
                                                     {
@@ -1566,7 +3577,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Profile",
+                                                    "VCProfile",
                                                     "leader",
                                                     "response",
                                                     {
@@ -1584,7 +3595,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "GroupmembersResolver": {
+        "VCProfileattendancesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1595,12 +3606,100 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "attendances",
+                "TypeName": "VCProfile",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCProfile",
+                                                    "attendances",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCProfile",
+                                                    "attendances",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCGroupmembersResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
                 "FieldName": "members",
-                "TypeName": "Group",
+                "TypeName": "VCGroup",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
                         "",
@@ -1620,7 +3719,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Group",
+                                                    "VCGroup",
                                                     "members",
                                                     "request",
                                                     {
@@ -1654,7 +3753,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Group",
+                                                    "VCGroup",
                                                     "members",
                                                     "response",
                                                     {
@@ -1672,7 +3771,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "GroupleaderResolver": {
+        "VCGroupleaderResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1683,12 +3782,12 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "ProfileDataSource",
+                        "VCProfileDataSource",
                         "Name"
                     ]
                 },
                 "FieldName": "leader",
-                "TypeName": "Group",
+                "TypeName": "VCGroup",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
                         "",
@@ -1708,7 +3807,7 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Group",
+                                                    "VCGroup",
                                                     "leader",
                                                     "request",
                                                     {
@@ -1742,8 +3841,448 @@
                                             "Fn::Join": [
                                                 ".",
                                                 [
-                                                    "Group",
+                                                    "VCGroup",
                                                     "leader",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityListschedulesResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "schedules",
+                "TypeName": "VCActivityList",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityList",
+                                                    "schedules",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityList",
+                                                    "schedules",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityScheduleactivityResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityListDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "activity",
+                "TypeName": "VCActivitySchedule",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivitySchedule",
+                                                    "activity",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivitySchedule",
+                                                    "activity",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityScheduleattendancesResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityAttendanceDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "attendances",
+                "TypeName": "VCActivitySchedule",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivitySchedule",
+                                                    "attendances",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivitySchedule",
+                                                    "attendances",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityAttendancescheduleResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCActivityScheduleDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "schedule",
+                "TypeName": "VCActivityAttendance",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityAttendance",
+                                                    "schedule",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityAttendance",
+                                                    "schedule",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "VCActivityAttendancememberResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "VCProfileDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "member",
+                "TypeName": "VCActivityAttendance",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityAttendance",
+                                                    "member",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "VCActivityAttendance",
+                                                    "member",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"

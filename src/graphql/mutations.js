@@ -1,8 +1,8 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const createProfile = `mutation CreateProfile($input: CreateProfileInput!) {
-  createProfile(input: $input) {
+export const createVcProfile = `mutation CreateVcProfile($input: CreateVCProfileInput!) {
+  createVCProfile(input: $input) {
     id
     firstName
     lastName
@@ -18,11 +18,18 @@ export const createProfile = `mutation CreateProfile($input: CreateProfileInput!
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const updateProfile = `mutation UpdateProfile($input: UpdateProfileInput!) {
-  updateProfile(input: $input) {
+export const updateVcProfile = `mutation UpdateVcProfile($input: UpdateVCProfileInput!) {
+  updateVCProfile(input: $input) {
     id
     firstName
     lastName
@@ -38,11 +45,18 @@ export const updateProfile = `mutation UpdateProfile($input: UpdateProfileInput!
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const deleteProfile = `mutation DeleteProfile($input: DeleteProfileInput!) {
-  deleteProfile(input: $input) {
+export const deleteVcProfile = `mutation DeleteVcProfile($input: DeleteVCProfileInput!) {
+  deleteVCProfile(input: $input) {
     id
     firstName
     lastName
@@ -58,11 +72,18 @@ export const deleteProfile = `mutation DeleteProfile($input: DeleteProfileInput!
       id
       name
     }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
   }
 }
 `;
-export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
-  createGroup(input: $input) {
+export const createVcGroup = `mutation CreateVcGroup($input: CreateVCGroupInput!) {
+  createVCGroup(input: $input) {
     id
     name
     members {
@@ -89,8 +110,8 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
   }
 }
 `;
-export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
-  updateGroup(input: $input) {
+export const updateVcGroup = `mutation UpdateVcGroup($input: UpdateVCGroupInput!) {
+  updateVCGroup(input: $input) {
     id
     name
     members {
@@ -117,8 +138,8 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
   }
 }
 `;
-export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
-  deleteGroup(input: $input) {
+export const deleteVcGroup = `mutation DeleteVcGroup($input: DeleteVCGroupInput!) {
+  deleteVCGroup(input: $input) {
     id
     name
     members {
@@ -142,6 +163,171 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
       monthOfBirth
       yearOfBirth
     }
+  }
+}
+`;
+export const createVcActivityList = `mutation CreateVcActivityList($input: CreateVCActivityListInput!) {
+  createVCActivityList(input: $input) {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateVcActivityList = `mutation UpdateVcActivityList($input: UpdateVCActivityListInput!) {
+  updateVCActivityList(input: $input) {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteVcActivityList = `mutation DeleteVcActivityList($input: DeleteVCActivityListInput!) {
+  deleteVCActivityList(input: $input) {
+    id
+    name
+    schedules {
+      items {
+        id
+        start
+        end
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createVcActivitySchedule = `mutation CreateVcActivitySchedule($input: CreateVCActivityScheduleInput!) {
+  createVCActivitySchedule(input: $input) {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateVcActivitySchedule = `mutation UpdateVcActivitySchedule($input: UpdateVCActivityScheduleInput!) {
+  updateVCActivitySchedule(input: $input) {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteVcActivitySchedule = `mutation DeleteVcActivitySchedule($input: DeleteVCActivityScheduleInput!) {
+  deleteVCActivitySchedule(input: $input) {
+    id
+    start
+    end
+    activity {
+      id
+      name
+    }
+    attendances {
+      items {
+        id
+        presence
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createVcActivityAttendance = `mutation CreateVcActivityAttendance($input: CreateVCActivityAttendanceInput!) {
+  createVCActivityAttendance(input: $input) {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
+  }
+}
+`;
+export const updateVcActivityAttendance = `mutation UpdateVcActivityAttendance($input: UpdateVCActivityAttendanceInput!) {
+  updateVCActivityAttendance(input: $input) {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
+  }
+}
+`;
+export const deleteVcActivityAttendance = `mutation DeleteVcActivityAttendance($input: DeleteVCActivityAttendanceInput!) {
+  deleteVCActivityAttendance(input: $input) {
+    id
+    schedule {
+      id
+      start
+      end
+    }
+    member {
+      id
+      firstName
+      lastName
+      phoneNumber
+      dayOfBirth
+      monthOfBirth
+      yearOfBirth
+    }
+    presence
   }
 }
 `;

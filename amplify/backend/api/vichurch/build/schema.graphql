@@ -1,20 +1,42 @@
-type Profile {
+type VCProfile {
   id: ID!
   firstName: String!
   lastName: String!
-  phoneNumber: String!
+  phoneNumber: AWSPhone
   dayOfBirth: Int
   monthOfBirth: Int
   yearOfBirth: Int
-  group: Group
-  leader: Group
+  group: VCGroup
+  leader: VCGroup
+  attendances(filter: ModelVCActivityAttendanceFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVCActivityAttendanceConnection
 }
 
-type Group {
+type VCGroup {
   id: ID!
   name: String!
-  members(filter: ModelProfileFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelProfileConnection
-  leader: Profile
+  members(filter: ModelVCProfileFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVCProfileConnection
+  leader: VCProfile
+}
+
+type VCActivityList {
+  id: ID!
+  name: String!
+  schedules(filter: ModelVCActivityScheduleFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVCActivityScheduleConnection
+}
+
+type VCActivitySchedule {
+  id: ID!
+  start: AWSDateTime!
+  end: AWSDateTime!
+  activity: VCActivityList!
+  attendances(filter: ModelVCActivityAttendanceFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVCActivityAttendanceConnection
+}
+
+type VCActivityAttendance {
+  id: ID!
+  schedule: VCActivitySchedule!
+  member: VCProfile!
+  presence: Boolean!
 }
 
 enum ModelSortDirection {
@@ -22,8 +44,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelProfileConnection {
-  items: [Profile]
+type ModelVCProfileConnection {
+  items: [VCProfile]
   nextToken: String
 }
 
@@ -82,7 +104,7 @@ input ModelBooleanFilterInput {
   eq: Boolean
 }
 
-input ModelProfileFilterInput {
+input ModelVCProfileFilterInput {
   id: ModelIDFilterInput
   firstName: ModelStringFilterInput
   lastName: ModelStringFilterInput
@@ -90,89 +112,203 @@ input ModelProfileFilterInput {
   dayOfBirth: ModelIntFilterInput
   monthOfBirth: ModelIntFilterInput
   yearOfBirth: ModelIntFilterInput
-  and: [ModelProfileFilterInput]
-  or: [ModelProfileFilterInput]
-  not: ModelProfileFilterInput
+  and: [ModelVCProfileFilterInput]
+  or: [ModelVCProfileFilterInput]
+  not: ModelVCProfileFilterInput
 }
 
 type Query {
-  getProfile(id: ID!): Profile
-  listProfiles(filter: ModelProfileFilterInput, limit: Int, nextToken: String): ModelProfileConnection
-  getGroup(id: ID!): Group
-  listGroups(filter: ModelGroupFilterInput, limit: Int, nextToken: String): ModelGroupConnection
+  getVCProfile(id: ID!): VCProfile
+  listVCProfiles(filter: ModelVCProfileFilterInput, limit: Int, nextToken: String): ModelVCProfileConnection
+  getVCGroup(id: ID!): VCGroup
+  listVCGroups(filter: ModelVCGroupFilterInput, limit: Int, nextToken: String): ModelVCGroupConnection
+  getVCActivityList(id: ID!): VCActivityList
+  listVCActivityLists(filter: ModelVCActivityListFilterInput, limit: Int, nextToken: String): ModelVCActivityListConnection
+  getVCActivitySchedule(id: ID!): VCActivitySchedule
+  listVCActivitySchedules(filter: ModelVCActivityScheduleFilterInput, limit: Int, nextToken: String): ModelVCActivityScheduleConnection
+  getVCActivityAttendance(id: ID!): VCActivityAttendance
+  listVCActivityAttendances(filter: ModelVCActivityAttendanceFilterInput, limit: Int, nextToken: String): ModelVCActivityAttendanceConnection
 }
 
-input CreateProfileInput {
+input CreateVCProfileInput {
   id: ID
   firstName: String!
   lastName: String!
-  phoneNumber: String!
+  phoneNumber: AWSPhone
   dayOfBirth: Int
   monthOfBirth: Int
   yearOfBirth: Int
-  profileGroupId: ID
-  profileLeaderId: ID
+  vCProfileGroupId: ID
+  vCProfileLeaderId: ID
 }
 
-input UpdateProfileInput {
+input UpdateVCProfileInput {
   id: ID!
   firstName: String
   lastName: String
-  phoneNumber: String
+  phoneNumber: AWSPhone
   dayOfBirth: Int
   monthOfBirth: Int
   yearOfBirth: Int
-  profileGroupId: ID
-  profileLeaderId: ID
+  vCProfileGroupId: ID
+  vCProfileLeaderId: ID
 }
 
-input DeleteProfileInput {
+input DeleteVCProfileInput {
   id: ID
 }
 
 type Mutation {
-  createProfile(input: CreateProfileInput!): Profile
-  updateProfile(input: UpdateProfileInput!): Profile
-  deleteProfile(input: DeleteProfileInput!): Profile
-  createGroup(input: CreateGroupInput!): Group
-  updateGroup(input: UpdateGroupInput!): Group
-  deleteGroup(input: DeleteGroupInput!): Group
+  createVCProfile(input: CreateVCProfileInput!): VCProfile
+  updateVCProfile(input: UpdateVCProfileInput!): VCProfile
+  deleteVCProfile(input: DeleteVCProfileInput!): VCProfile
+  createVCGroup(input: CreateVCGroupInput!): VCGroup
+  updateVCGroup(input: UpdateVCGroupInput!): VCGroup
+  deleteVCGroup(input: DeleteVCGroupInput!): VCGroup
+  createVCActivityList(input: CreateVCActivityListInput!): VCActivityList
+  updateVCActivityList(input: UpdateVCActivityListInput!): VCActivityList
+  deleteVCActivityList(input: DeleteVCActivityListInput!): VCActivityList
+  createVCActivitySchedule(input: CreateVCActivityScheduleInput!): VCActivitySchedule
+  updateVCActivitySchedule(input: UpdateVCActivityScheduleInput!): VCActivitySchedule
+  deleteVCActivitySchedule(input: DeleteVCActivityScheduleInput!): VCActivitySchedule
+  createVCActivityAttendance(input: CreateVCActivityAttendanceInput!): VCActivityAttendance
+  updateVCActivityAttendance(input: UpdateVCActivityAttendanceInput!): VCActivityAttendance
+  deleteVCActivityAttendance(input: DeleteVCActivityAttendanceInput!): VCActivityAttendance
 }
 
 type Subscription {
-  onCreateProfile: Profile @aws_subscribe(mutations: ["createProfile"])
-  onUpdateProfile: Profile @aws_subscribe(mutations: ["updateProfile"])
-  onDeleteProfile: Profile @aws_subscribe(mutations: ["deleteProfile"])
-  onCreateGroup: Group @aws_subscribe(mutations: ["createGroup"])
-  onUpdateGroup: Group @aws_subscribe(mutations: ["updateGroup"])
-  onDeleteGroup: Group @aws_subscribe(mutations: ["deleteGroup"])
+  onCreateVCProfile: VCProfile @aws_subscribe(mutations: ["createVCProfile"])
+  onUpdateVCProfile: VCProfile @aws_subscribe(mutations: ["updateVCProfile"])
+  onDeleteVCProfile: VCProfile @aws_subscribe(mutations: ["deleteVCProfile"])
+  onCreateVCGroup: VCGroup @aws_subscribe(mutations: ["createVCGroup"])
+  onUpdateVCGroup: VCGroup @aws_subscribe(mutations: ["updateVCGroup"])
+  onDeleteVCGroup: VCGroup @aws_subscribe(mutations: ["deleteVCGroup"])
+  onCreateVCActivityList: VCActivityList @aws_subscribe(mutations: ["createVCActivityList"])
+  onUpdateVCActivityList: VCActivityList @aws_subscribe(mutations: ["updateVCActivityList"])
+  onDeleteVCActivityList: VCActivityList @aws_subscribe(mutations: ["deleteVCActivityList"])
+  onCreateVCActivitySchedule: VCActivitySchedule @aws_subscribe(mutations: ["createVCActivitySchedule"])
+  onUpdateVCActivitySchedule: VCActivitySchedule @aws_subscribe(mutations: ["updateVCActivitySchedule"])
+  onDeleteVCActivitySchedule: VCActivitySchedule @aws_subscribe(mutations: ["deleteVCActivitySchedule"])
+  onCreateVCActivityAttendance: VCActivityAttendance @aws_subscribe(mutations: ["createVCActivityAttendance"])
+  onUpdateVCActivityAttendance: VCActivityAttendance @aws_subscribe(mutations: ["updateVCActivityAttendance"])
+  onDeleteVCActivityAttendance: VCActivityAttendance @aws_subscribe(mutations: ["deleteVCActivityAttendance"])
 }
 
-type ModelGroupConnection {
-  items: [Group]
+type ModelVCGroupConnection {
+  items: [VCGroup]
   nextToken: String
 }
 
-input ModelGroupFilterInput {
+input ModelVCGroupFilterInput {
   id: ModelIDFilterInput
   name: ModelStringFilterInput
-  and: [ModelGroupFilterInput]
-  or: [ModelGroupFilterInput]
-  not: ModelGroupFilterInput
+  and: [ModelVCGroupFilterInput]
+  or: [ModelVCGroupFilterInput]
+  not: ModelVCGroupFilterInput
 }
 
-input CreateGroupInput {
+input CreateVCGroupInput {
   id: ID
   name: String!
-  groupLeaderId: ID
+  vCGroupLeaderId: ID
 }
 
-input UpdateGroupInput {
+input UpdateVCGroupInput {
   id: ID!
   name: String
-  groupLeaderId: ID
+  vCGroupLeaderId: ID
 }
 
-input DeleteGroupInput {
+input DeleteVCGroupInput {
+  id: ID
+}
+
+type ModelVCActivityListConnection {
+  items: [VCActivityList]
+  nextToken: String
+}
+
+input ModelVCActivityListFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  and: [ModelVCActivityListFilterInput]
+  or: [ModelVCActivityListFilterInput]
+  not: ModelVCActivityListFilterInput
+}
+
+input CreateVCActivityListInput {
+  id: ID
+  name: String!
+}
+
+input UpdateVCActivityListInput {
+  id: ID!
+  name: String
+}
+
+input DeleteVCActivityListInput {
+  id: ID
+}
+
+type ModelVCActivityScheduleConnection {
+  items: [VCActivitySchedule]
+  nextToken: String
+}
+
+input ModelVCActivityScheduleFilterInput {
+  id: ModelIDFilterInput
+  start: ModelStringFilterInput
+  end: ModelStringFilterInput
+  and: [ModelVCActivityScheduleFilterInput]
+  or: [ModelVCActivityScheduleFilterInput]
+  not: ModelVCActivityScheduleFilterInput
+}
+
+input CreateVCActivityScheduleInput {
+  id: ID
+  start: AWSDateTime!
+  end: AWSDateTime!
+  vCActivityScheduleActivityId: ID!
+}
+
+input UpdateVCActivityScheduleInput {
+  id: ID!
+  start: AWSDateTime
+  end: AWSDateTime
+  vCActivityScheduleActivityId: ID
+}
+
+input DeleteVCActivityScheduleInput {
+  id: ID
+}
+
+type ModelVCActivityAttendanceConnection {
+  items: [VCActivityAttendance]
+  nextToken: String
+}
+
+input ModelVCActivityAttendanceFilterInput {
+  id: ModelIDFilterInput
+  presence: ModelBooleanFilterInput
+  and: [ModelVCActivityAttendanceFilterInput]
+  or: [ModelVCActivityAttendanceFilterInput]
+  not: ModelVCActivityAttendanceFilterInput
+}
+
+input CreateVCActivityAttendanceInput {
+  id: ID
+  presence: Boolean!
+  vCActivityAttendanceScheduleId: ID!
+  vCActivityAttendanceMemberId: ID!
+}
+
+input UpdateVCActivityAttendanceInput {
+  id: ID!
+  presence: Boolean
+  vCActivityAttendanceScheduleId: ID
+  vCActivityAttendanceMemberId: ID
+}
+
+input DeleteVCActivityAttendanceInput {
   id: ID
 }

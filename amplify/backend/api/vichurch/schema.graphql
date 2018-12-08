@@ -1,18 +1,40 @@
-type Profile @model {
+type VCProfile @model {
   id: ID!
   firstName: String!
   lastName: String!
-  phoneNumber: String!
+  phoneNumber: AWSPhone
   dayOfBirth: Int
   monthOfBirth: Int
   yearOfBirth: Int
-  group: Group @connection(name: "GroupMembers")
-  leader: Group @connection(name: "GroupLeader")
+  group: VCGroup @connection(name: "GroupMembers")
+  leader: VCGroup @connection(name: "GroupLeader")
+  attendances: [VCActivityAttendance] @connection(name: "ProfileAttendance")
 }
 
-type Group @model {
+type VCGroup @model {
   id: ID!
   name: String!
-  members: [Profile] @connection(name: "GroupMembers")
-  leader: Profile @connection(name: "GroupLeader")
+  members: [VCProfile] @connection(name: "GroupMembers")
+  leader: VCProfile @connection(name: "GroupLeader")
+}
+
+type VCActivityList @model {
+  id: ID!
+  name: String!
+  schedules: [VCActivitySchedule] @connection(name: "ActivitySchedule")
+}
+
+type VCActivitySchedule @model {
+  id: ID!
+  start: AWSDateTime!
+  end: AWSDateTime!
+  activity: VCActivityList! @connection(name: "ActivitySchedule")
+  attendances: [VCActivityAttendance] @connection(name: "ScheduleAttendance")
+}
+
+type VCActivityAttendance @model {
+  id: ID!
+  schedule: VCActivitySchedule! @connection(name: "ScheduleAttendance")
+  member: VCProfile! @connection(name: "ProfileAttendance")
+  presence: Boolean!
 }
