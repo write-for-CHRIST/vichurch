@@ -1,0 +1,178 @@
+type Profile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  group: Group
+  leader: Group
+}
+
+type Group {
+  id: ID!
+  name: String!
+  members(filter: ModelProfileFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelProfileConnection
+  leader: Profile
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelProfileConnection {
+  items: [Profile]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelProfileFilterInput {
+  id: ModelIDFilterInput
+  firstName: ModelStringFilterInput
+  lastName: ModelStringFilterInput
+  phoneNumber: ModelStringFilterInput
+  dayOfBirth: ModelIntFilterInput
+  monthOfBirth: ModelIntFilterInput
+  yearOfBirth: ModelIntFilterInput
+  and: [ModelProfileFilterInput]
+  or: [ModelProfileFilterInput]
+  not: ModelProfileFilterInput
+}
+
+type Query {
+  getProfile(id: ID!): Profile
+  listProfiles(filter: ModelProfileFilterInput, limit: Int, nextToken: String): ModelProfileConnection
+  getGroup(id: ID!): Group
+  listGroups(filter: ModelGroupFilterInput, limit: Int, nextToken: String): ModelGroupConnection
+}
+
+input CreateProfileInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  profileGroupId: ID
+  profileLeaderId: ID
+}
+
+input UpdateProfileInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  profileGroupId: ID
+  profileLeaderId: ID
+}
+
+input DeleteProfileInput {
+  id: ID
+}
+
+type Mutation {
+  createProfile(input: CreateProfileInput!): Profile
+  updateProfile(input: UpdateProfileInput!): Profile
+  deleteProfile(input: DeleteProfileInput!): Profile
+  createGroup(input: CreateGroupInput!): Group
+  updateGroup(input: UpdateGroupInput!): Group
+  deleteGroup(input: DeleteGroupInput!): Group
+}
+
+type Subscription {
+  onCreateProfile: Profile @aws_subscribe(mutations: ["createProfile"])
+  onUpdateProfile: Profile @aws_subscribe(mutations: ["updateProfile"])
+  onDeleteProfile: Profile @aws_subscribe(mutations: ["deleteProfile"])
+  onCreateGroup: Group @aws_subscribe(mutations: ["createGroup"])
+  onUpdateGroup: Group @aws_subscribe(mutations: ["updateGroup"])
+  onDeleteGroup: Group @aws_subscribe(mutations: ["deleteGroup"])
+}
+
+type ModelGroupConnection {
+  items: [Group]
+  nextToken: String
+}
+
+input ModelGroupFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  and: [ModelGroupFilterInput]
+  or: [ModelGroupFilterInput]
+  not: ModelGroupFilterInput
+}
+
+input CreateGroupInput {
+  id: ID
+  name: String!
+  groupLeaderId: ID
+}
+
+input UpdateGroupInput {
+  id: ID!
+  name: String
+  groupLeaderId: ID
+}
+
+input DeleteGroupInput {
+  id: ID
+}

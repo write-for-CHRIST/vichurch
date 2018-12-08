@@ -1,0 +1,16 @@
+projects:
+  vichurch:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        graphQLApiId: subhk6higfdbjeurm2ymzw5gva
+      endpoints:
+        prod: >-
+          https://jxabe57f3fas7fke3ltwblwrra.appsync-api.ap-southeast-1.amazonaws.com/graphql

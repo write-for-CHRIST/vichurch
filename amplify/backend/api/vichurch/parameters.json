@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "vichurch",
+    "schemaGraphql": "s3://vichurch-20181208132951-deployment/amplify-appsync-files/schema.graphql.1544250852056",
+    "ResolverBucket": "vichurch-20181208132951-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1544250852056"
+}

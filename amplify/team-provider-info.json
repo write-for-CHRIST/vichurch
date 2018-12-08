@@ -1,0 +1,26 @@
+{
+    "NONE": {
+        "awscloudformation": {
+            "AuthRoleName": "vichurch-20181208132951-authRole",
+            "UnauthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208132951-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208132951-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "vichurch-20181208132951-deployment",
+            "UnauthRoleName": "vichurch-20181208132951-unauthRole",
+            "StackName": "vichurch-20181208132951",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:086311596287:stack/vichurch-20181208132951/ab2f8120-fab2-11e8-bd15-0299b044e622"
+        }
+    },
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "vichurch-20181208190458-authRole",
+            "UnauthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208190458-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208190458-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "vichurch-20181208190458-deployment",
+            "UnauthRoleName": "vichurch-20181208190458-unauthRole",
+            "StackName": "vichurch-20181208190458",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:086311596287:stack/vichurch-20181208190458/7bef5c30-fae1-11e8-b135-02f6be1377fa"
+        }
+    }
+}

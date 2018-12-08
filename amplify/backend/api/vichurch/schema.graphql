@@ -1,0 +1,18 @@
+type Profile @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  group: Group @connection(name: "GroupMembers")
+  leader: Group @connection(name: "GroupLeader")
+}
+
+type Group @model {
+  id: ID!
+  name: String!
+  members: [Profile] @connection(name: "GroupMembers")
+  leader: Profile @connection(name: "GroupLeader")
+}
