@@ -4,6 +4,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `amplify init`
+
+Initialize the required environment.
+
+### `amplify update api`
+
+Generate `src/aws-exports.js` file for AWS API authorization.
+
+### `amplify push`
+
+Update backend code GraphQL.
+
+### `amplify publish`
+
+Publish both backend and frontend code.
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
