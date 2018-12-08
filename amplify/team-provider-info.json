@@ -22,5 +22,17 @@
             "StackName": "vichurch-20181208190458",
             "StackId": "arn:aws:cloudformation:ap-southeast-1:086311596287:stack/vichurch-20181208190458/7bef5c30-fae1-11e8-b135-02f6be1377fa"
         }
+    },
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "vichurch-20181208191103-authRole",
+            "UnauthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208191103-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::086311596287:role/vichurch-20181208191103-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "vichurch-20181208191103-deployment",
+            "UnauthRoleName": "vichurch-20181208191103-unauthRole",
+            "StackName": "vichurch-20181208191103",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:086311596287:stack/vichurch-20181208191103/557257f0-fae2-11e8-8193-0a996106fc92"
+        }
     }
 }
