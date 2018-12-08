@@ -84,10 +84,10 @@
 				"TemplateURL": "https://s3.amazonaws.com/vichurch-20181208191103-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "vichurch",
-					"schemaGraphql": "s3://vichurch-20181208191103-deployment/amplify-appsync-files/schema.graphql.1544276000820",
+					"schemaGraphql": "s3://vichurch-20181208191103-deployment/amplify-appsync-files/schema.graphql.1544277841817",
 					"ResolverBucket": "vichurch-20181208191103-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1544276000820",
+					"DeploymentTimestamp": "1544277841817",
 					"env": "dev"
 				}
 			}

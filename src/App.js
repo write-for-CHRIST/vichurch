@@ -3,13 +3,13 @@ import Amplify, {Analytics, Storage, API, graphqlOperation} from 'aws-amplify';
 import aws_exports from './aws-exports';
 import logo from './logo.svg';
 import './App.css';
-import {listProfiles} from './graphql/queries';
+import {listVcProfiles} from './graphql/queries';
 
 Amplify.configure(aws_exports);
 class App extends Component {
   listQuery = async () => {
     console.log('Listing profile...');
-    const allProfiles = await API.graphql(graphqlOperation(listProfiles));
+    const allProfiles = await API.graphql(graphqlOperation(listVcProfiles));
     alert(JSON.stringify(allProfiles));
   };
 
