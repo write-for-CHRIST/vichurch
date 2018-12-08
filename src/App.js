@@ -1,38 +1,24 @@
 import React, {Component} from 'react';
-import Amplify, {Analytics, Storage, API, graphqlOperation} from 'aws-amplify';
-import aws_exports from './aws-exports';
-import logo from './logo.svg';
-import './App.css';
-import {listVcProfiles} from './graphql/queries';
+import AppRouter from './features/router';
+import withRoot from './withRoot';
+import {withStyles} from '@material-ui/core/styles';
 
-Amplify.configure(aws_exports);
+const styles = theme => ({
+  root: {
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 20,
+  },
+});
+
 class App extends Component {
-  listQuery = async () => {
-    console.log('Listing profile...');
-    const allProfiles = await API.graphql(graphqlOperation(listVcProfiles));
-    alert(JSON.stringify(allProfiles));
-  };
-
   render() {
+    const {classes} = this.props;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer">
-            Learn React
-          </a>
-          <button onClick={this.listQuery}>getProfiles</button>
-        </header>
+      <div className={classes.root}>
+        <AppRouter />
       </div>
     );
   }
 }
 
-export default App;
+export default withRoot(withStyles(styles)(App));
