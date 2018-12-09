@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AppRouter from './features/router';
 import withRoot from './withRoot';
 import {withStyles} from '@material-ui/core/styles';
+import Layout from './components/layout';
 
 const styles = theme => ({
   root: {
@@ -15,7 +16,9 @@ class App extends Component {
     const {classes} = this.props;
     return (
       <div className={classes.root}>
-        <AppRouter />
+        <Layout>
+          <AppRouter />
+        </Layout>
       </div>
     );
   }

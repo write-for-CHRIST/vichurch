@@ -60,7 +60,7 @@ const Profile = ({classes}) => {
     <main>
       <Paper className={classes.main}>
         <Typography component="h1" variant="h6">
-          Hồ Sơ Ban Viên {firstName}
+          Hồ Sơ Ban Viên
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <FormControl margin="normal" required fullWidth>
