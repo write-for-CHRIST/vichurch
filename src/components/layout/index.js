@@ -84,7 +84,7 @@ const styles = theme => ({
 });
 
 const Layout = ({children, classes, theme}) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={classes.root}>
       <AppBar
@@ -103,7 +103,7 @@ const Layout = ({children, classes, theme}) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" noWrap>
-            ViChurch {open ? 'true' : 'false'}
+            ViChurch
           </Typography>
         </Toolbar>
       </AppBar>
@@ -121,7 +121,7 @@ const Layout = ({children, classes, theme}) => {
         }}
         open={open}>
         <div className={classes.toolbar}>
-          <IconButton onClick={() => {setOpen(false)}}>
+          <IconButton onClick={() => {setOpen(!open)}}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
