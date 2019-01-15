@@ -12,8 +12,11 @@ stages:
   - release_production
 
 before_script:
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-  - yarn install --network-timeout 1000000
+	- |
+		if [ "$CI_JOB_NAME" -ne "build_desktop" ]; then
+			echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  		yarn install --network-timeout 1000000
+		fi;
 
 core_library:
   image: nampdn/node-alpine-git:11
