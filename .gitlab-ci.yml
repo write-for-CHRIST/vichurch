@@ -41,4 +41,4 @@ build_desktop:
   tags:
     - build-image
   script:
-    - yarn build:desktop-docker
+    - bash ./scripts/shell/desktop.sh
