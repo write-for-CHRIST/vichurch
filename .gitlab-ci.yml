@@ -42,3 +42,12 @@ build_desktop:
     - build-image
   script:
     - bash ./scripts/shell/desktop.sh
+
+build_mobile:
+  stage: build
+  tags:
+    - ios
+  before_script:
+    - yarn install --network-timeout 1000000
+  script:
+    - yarn workspace @devon/mobile build

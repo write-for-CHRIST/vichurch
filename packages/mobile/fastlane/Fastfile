@@ -1,0 +1,18 @@
+platform :ios do
+  # iOS Lane
+  desc 'Fetch certificates and provisioning profiles'
+
+  lane :certificates do
+    match(git_url: ENV['MATCH_GIT_URL'], app_identifier: 'tv.vgm.app', type: 'development', readonly: true)
+    match(git_url: ENV['MATCH_GIT_URL'], app_identifier: 'tv.vgm.app', type: 'appstore', readonly: true)
+  end
+
+  desc 'Build iOS App'
+  lane :build do
+    build_app(
+      project: "./ios/mobile.xcodeproj",
+      scheme: "mobile",
+      output_directory: "./fastlane"
+    )
+  end
+end
