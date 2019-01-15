@@ -25,7 +25,8 @@
     "run:web": "yarn workspace @devon/web",
     "start:mobile": "yarn run:mobile build && concurrently --kill-others \"yarn build -w\" \"yarn workspace @devon/mobile dev\"",
     "start:web": "yarn run:web build && concurrently --kill-others \"yarn build -w\" \"yarn workspace @devon/web dev\"",
-    "start:desktop": "BROWSER=none concurrently \"yarn dev:web\" \"yarn workspace @devon/desktop compile -w\" \"wait-on http://localhost:3000 && yarn workspace @devon/desktop start\""
+    "start:desktop": "BROWSER=none concurrently \"yarn dev:web\" \"yarn workspace @devon/desktop compile -w\" \"wait-on http://localhost:3000 && yarn workspace @devon/desktop start\"",
+    "build:desktop-docker": "bash ./scripts/shell/desktop.sh"
   },
   "workspaces": {
     "packages": [

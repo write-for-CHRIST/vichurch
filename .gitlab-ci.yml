@@ -32,3 +32,10 @@ build_web:
     - library
   script:
     - yarn run:web build
+
+build_desktop:
+  stage: build
+  tags:
+    - build_image
+  script:
+    - yarn build:desktop-docker
