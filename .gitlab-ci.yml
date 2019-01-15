@@ -1,7 +1,8 @@
 cache:
-  - ./node_modules
-  - $HOME/.cache/electron
-  - $HOME/.cache/electron-builder
+  paths:
+    - ./node_modules
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
 
 stages:
   - library
