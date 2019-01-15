@@ -22,6 +22,7 @@
     "run:core": "yarn workspace @devon/core",
     "run:components": "yarn workspace @devon/components",
     "run:mobile": "yarn workspace @devon/mobile",
+    "run:web": "yarn workspace @devon/web",
     "start:mobile": "yarn run:mobile build && concurrently --kill-others \"yarn build -w\" \"yarn workspace @devon/mobile dev\"",
     "start:web": "yarn run:web build && concurrently --kill-others \"yarn build -w\" \"yarn workspace @devon/web dev\"",
     "start:desktop": "BROWSER=none concurrently \"yarn dev:web\" \"yarn workspace @devon/desktop compile -w\" \"wait-on http://localhost:3000 && yarn workspace @devon/desktop start\""
@@ -29,16 +30,6 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": [
-      "**/ts-jest",
-      "**/ts-jest/**",
-      "**/babel-jest",
-      "**/babel-jest/**",
-      "**/react-native",
-      "**/react-native/**",
-      "**/metro-react-native-babel-preset",
-      "**/metro-react-native-babel-preset/**"
     ]
   },
   "devDependencies": {
@@ -49,7 +40,6 @@
     "patch-package": "5.1.1",
     "postinstall-prepare": "1.0.1",
     "prettier": "1.15.3",
-    "react-native": "npm:@brunolemos/react-native",
     "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
     "tslint-react": "3.6.0",

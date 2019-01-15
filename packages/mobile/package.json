@@ -7,7 +7,7 @@
     "clean": "cd .",
     "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
     "lint": "tslint -p .",
-    "dev": "node ../../node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "dev": "node ../../node_modules/react-native/local-cli/cli.js start",
     "build": "echo 'mobile will be built'",
     "ios": "react-native run-ios",
     "android": "react-native run-android",

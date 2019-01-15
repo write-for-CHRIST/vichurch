@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
 export function App() {
   return (
     <View style={styles.container}>
-      <Text>DEVON</Text>
-      <Text>Build apps without gaps!</Text>
+      <Text>VGM TV</Text>
+      <Text>Build apps!</Text>
     </View>
   )
 }
