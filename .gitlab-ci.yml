@@ -36,6 +36,6 @@ build_web:
 build_desktop:
   stage: build
   tags:
-    - build_image
+    - build-image
   script:
     - yarn build:desktop-docker
