@@ -16,10 +16,11 @@ before_script:
   - yarn
 
 core_library:
-  image: nampdn/node-apline-git:11
+  image: nampdn/node-alpine-git:11
   stage: library
   tags:
     - docker
+    - library
   script:
     - yarn run:core build
 
@@ -28,5 +29,6 @@ build_web:
   stage: build
   tags:
     - docker
+    - library
   script:
     - yarn run:web build
