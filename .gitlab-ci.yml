@@ -13,7 +13,7 @@ stages:
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-  - yarn
+  - yarn install --network-timeout 1000000
 
 core_library:
   image: nampdn/node-alpine-git:11
