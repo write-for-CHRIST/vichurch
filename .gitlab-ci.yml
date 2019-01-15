@@ -1,0 +1,31 @@
+cache:
+  - ./node_modules
+  - $HOME/.cache/electron
+  - $HOME/.cache/electron-builder
+
+stages:
+  - library
+  - build
+  - test
+  - release_staging
+  - release_production
+
+before_script:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  - yarn
+
+core_library:
+  image: nampdn/node-apline-git:11
+  stage: library
+  tags:
+    - docker
+  script:
+    - yarn run:core build
+
+build_web:
+  image: nampdn/node-alpine-git:11
+  stage: build
+  tags:
+    - docker
+  script:
+    - yarn run:web build
