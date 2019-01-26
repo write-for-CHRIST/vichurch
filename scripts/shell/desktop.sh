@@ -7,4 +7,4 @@ docker run --rm \
   -v ~/.cache/electron-builder:/root/.cache/electron-builder \
   electronuserland/builder:wine \
   /bin/bash -c \
-  "yarn --link-duplicates --pure-lockfile && yarn clean && yarn workspace @devon/web build && yarn workspace @devon/desktop build:skipweb --linux --win"
+  "yarn --link-duplicates --pure-lockfile && yarn clean && yarn workspace @devon/web build && yarn workspace @devon/desktop build:skipweb"
