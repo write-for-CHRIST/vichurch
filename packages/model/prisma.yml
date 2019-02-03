@@ -1,7 +1,12 @@
-endpoint: http://graph-dev.btngiadinh.com:4466/vichurch-btngiadinh/dev
+endpoint: https://graph.btngiadinh.com/vichurch-btngiadinh/dev
 datamodel: datamodel.prisma
 secret: $(env:PRISMA_MANAGEMENT_API_SECRET)
 
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
+
+hooks:
+  post-deploy:
+    - prisma generate
+

@@ -1,7 +1,9 @@
 type Profile {
   id: ID! @unique
+  oldId: ID! @unique
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int

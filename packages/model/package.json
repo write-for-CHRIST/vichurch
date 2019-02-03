@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "deploy": "npx prisma deploy && npx prisma generate",
+    "deploy": "npx prisma deploy",
     "build": "tsc -b"
   },
   "dependencies": {

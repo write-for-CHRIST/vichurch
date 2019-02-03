@@ -811,8 +811,10 @@ type PageInfo {
 
 type Profile {
   id: ID!
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -829,8 +831,10 @@ type ProfileConnection {
 }
 
 input ProfileCreateInput {
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -856,8 +860,10 @@ input ProfileCreateOneWithoutLeaderInput {
 }
 
 input ProfileCreateWithoutAttendancesInput {
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -867,8 +873,10 @@ input ProfileCreateWithoutAttendancesInput {
 }
 
 input ProfileCreateWithoutGroupInput {
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -878,8 +886,10 @@ input ProfileCreateWithoutGroupInput {
 }
 
 input ProfileCreateWithoutLeaderInput {
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -896,10 +906,14 @@ type ProfileEdge {
 enum ProfileOrderByInput {
   id_ASC
   id_DESC
+  oldId_ASC
+  oldId_DESC
   firstName_ASC
   firstName_DESC
   lastName_ASC
   lastName_DESC
+  gender_ASC
+  gender_DESC
   phoneNumber_ASC
   phoneNumber_DESC
   dayOfBirth_ASC
@@ -916,8 +930,10 @@ enum ProfileOrderByInput {
 
 type ProfilePreviousValues {
   id: ID!
+  oldId: ID!
   firstName: String!
   lastName: String!
+  gender: Boolean!
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -939,6 +955,20 @@ input ProfileScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  oldId: ID
+  oldId_not: ID
+  oldId_in: [ID!]
+  oldId_not_in: [ID!]
+  oldId_lt: ID
+  oldId_lte: ID
+  oldId_gt: ID
+  oldId_gte: ID
+  oldId_contains: ID
+  oldId_not_contains: ID
+  oldId_starts_with: ID
+  oldId_not_starts_with: ID
+  oldId_ends_with: ID
+  oldId_not_ends_with: ID
   firstName: String
   firstName_not: String
   firstName_in: [String!]
@@ -967,6 +997,8 @@ input ProfileScalarWhereInput {
   lastName_not_starts_with: String
   lastName_ends_with: String
   lastName_not_ends_with: String
+  gender: Boolean
+  gender_not: Boolean
   phoneNumber: String
   phoneNumber_not: String
   phoneNumber_in: [String!]
@@ -1029,8 +1061,10 @@ input ProfileSubscriptionWhereInput {
 }
 
 input ProfileUpdateInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1041,8 +1075,10 @@ input ProfileUpdateInput {
 }
 
 input ProfileUpdateManyDataInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1050,8 +1086,10 @@ input ProfileUpdateManyDataInput {
 }
 
 input ProfileUpdateManyMutationInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1091,8 +1129,10 @@ input ProfileUpdateOneWithoutLeaderInput {
 }
 
 input ProfileUpdateWithoutAttendancesDataInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1102,8 +1142,10 @@ input ProfileUpdateWithoutAttendancesDataInput {
 }
 
 input ProfileUpdateWithoutGroupDataInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1113,8 +1155,10 @@ input ProfileUpdateWithoutGroupDataInput {
 }
 
 input ProfileUpdateWithoutLeaderDataInput {
+  oldId: ID
   firstName: String
   lastName: String
+  gender: Boolean
   phoneNumber: String
   dayOfBirth: Int
   monthOfBirth: Int
@@ -1159,6 +1203,20 @@ input ProfileWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  oldId: ID
+  oldId_not: ID
+  oldId_in: [ID!]
+  oldId_not_in: [ID!]
+  oldId_lt: ID
+  oldId_lte: ID
+  oldId_gt: ID
+  oldId_gte: ID
+  oldId_contains: ID
+  oldId_not_contains: ID
+  oldId_starts_with: ID
+  oldId_not_starts_with: ID
+  oldId_ends_with: ID
+  oldId_not_ends_with: ID
   firstName: String
   firstName_not: String
   firstName_in: [String!]
@@ -1187,6 +1245,8 @@ input ProfileWhereInput {
   lastName_not_starts_with: String
   lastName_ends_with: String
   lastName_not_ends_with: String
+  gender: Boolean
+  gender_not: Boolean
   phoneNumber: String
   phoneNumber_not: String
   phoneNumber_in: [String!]
@@ -1237,6 +1297,7 @@ input ProfileWhereInput {
 
 input ProfileWhereUniqueInput {
   id: ID
+  oldId: ID
 }
 
 type Query {
