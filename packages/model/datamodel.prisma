@@ -1,0 +1,42 @@
+type Profile {
+  id: ID! @unique
+  oldId: ID! @unique
+  firstName: String!
+  lastName: String!
+  gender: Boolean!
+  phoneNumber: String
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  group: Group @relation(name: "GroupMembers")
+  leader: Group @relation(name: "GroupLeader")
+  attendances: [ActivityAttendance] @relation(name: "ProfileAttendance")
+}
+
+type Group {
+  id: ID! @unique
+  name: String!
+  members: [Profile] @relation(name: "GroupMembers")
+  leader: Profile @relation(name: "GroupLeader")
+}
+
+type ActivityList {
+  id: ID! @unique
+  name: String!
+  schedules: [ActivitySchedule] @relation(name: "ActivitySchedule")
+}
+
+type ActivitySchedule {
+  id: ID! @unique
+  start: DateTime!
+  end: DateTime!
+  activity: ActivityList! @relation(name: "ActivitySchedule")
+  attendances: [ActivityAttendance] @relation(name: "ScheduleAttendance")
+}
+
+type ActivityAttendance {
+  id: ID! @unique
+  schedule: ActivitySchedule! @relation(name: "ScheduleAttendance")
+  member: Profile! @relation(name: "ProfileAttendance")
+  presence: Boolean!
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@write-for-christ/vichurch-model",
+  "version": "0.2.0",
+  "description": "ViChurch TypeScript Model",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "author": "Nam Pham <nampdn@protonmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "deploy": "npx prisma deploy",
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "graphql": "14.1.1",
+    "prisma-client-lib": "1.25.3"
+  },
+  "devDependencies": {
+    "@types/graphql": "14.0.5",
+    "@types/ws": "6.0.1",
+    "ts-node": "8.0.2",
+    "typescript": "3.2.4"
+  }
+}

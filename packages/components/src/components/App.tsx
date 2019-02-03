@@ -1,18 +1,23 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { AppNavigator } from '../navigation/AppNavigation'
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'stretch',
+    alignSelf: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    maxWidth: 400,
     backgroundColor: '#fff',
-    marginTop: 24
-  }
+    width: '100%'
+  },
 })
 
 export function App() {
   return (
     <View style={styles.container}>
-      <Text>VGM TV</Text>
-      <Text>Build apps!</Text>
+      <AppNavigator />
     </View>
   )
 }

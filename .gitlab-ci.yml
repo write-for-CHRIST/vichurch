@@ -1,0 +1,53 @@
+cache:
+  paths:
+    - ./node_modules
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
+
+stages:
+  - library
+  - build
+  - test
+  - release_staging
+  - release_production
+
+before_script:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+
+core_library:
+  image: nampdn/node-alpine-git:11
+  stage: library
+  tags:
+    - docker
+    - library
+  before_script:
+    - yarn install --network-timeout 1000000
+  script:
+    - yarn run:core build
+
+build_web:
+  image: nampdn/node-alpine-git:11
+  stage: build
+  tags:
+    - docker
+    - library
+  before_script:
+    - yarn install --network-timeout 1000000
+  script:
+    - yarn run:web build
+
+build_desktop:
+  stage: build
+  tags:
+    - build-image
+  script:
+    - bash ./scripts/shell/desktop.sh
+
+build_mobile:
+  stage: build
+  tags:
+    - ios
+  before_script:
+    - yarn install --network-timeout 1000000
+  script:
+    - yarn workspace @devon/mobile build
