@@ -19,8 +19,12 @@ export interface Exists {
   ) => Promise<boolean>;
   activityList: (where?: ActivityListWhereInput) => Promise<boolean>;
   activitySchedule: (where?: ActivityScheduleWhereInput) => Promise<boolean>;
+  address: (where?: AddressWhereInput) => Promise<boolean>;
+  commune: (where?: CommuneWhereInput) => Promise<boolean>;
+  district: (where?: DistrictWhereInput) => Promise<boolean>;
   group: (where?: GroupWhereInput) => Promise<boolean>;
   profile: (where?: ProfileWhereInput) => Promise<boolean>;
+  province: (where?: ProvinceWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -103,6 +107,63 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ActivityScheduleConnectionPromise;
+  address: (where: AddressWhereUniqueInput) => AddressPromise;
+  addresses: (args?: {
+    where?: AddressWhereInput;
+    orderBy?: AddressOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Address>;
+  addressesConnection: (args?: {
+    where?: AddressWhereInput;
+    orderBy?: AddressOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => AddressConnectionPromise;
+  commune: (where: CommuneWhereUniqueInput) => CommunePromise;
+  communes: (args?: {
+    where?: CommuneWhereInput;
+    orderBy?: CommuneOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Commune>;
+  communesConnection: (args?: {
+    where?: CommuneWhereInput;
+    orderBy?: CommuneOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CommuneConnectionPromise;
+  district: (where: DistrictWhereUniqueInput) => DistrictPromise;
+  districts: (args?: {
+    where?: DistrictWhereInput;
+    orderBy?: DistrictOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<District>;
+  districtsConnection: (args?: {
+    where?: DistrictWhereInput;
+    orderBy?: DistrictOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DistrictConnectionPromise;
   group: (where: GroupWhereUniqueInput) => GroupPromise;
   groups: (args?: {
     where?: GroupWhereInput;
@@ -141,6 +202,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ProfileConnectionPromise;
+  province: (where: ProvinceWhereUniqueInput) => ProvincePromise;
+  provinces: (args?: {
+    where?: ProvinceWhereInput;
+    orderBy?: ProvinceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Province>;
+  provincesConnection: (args?: {
+    where?: ProvinceWhereInput;
+    orderBy?: ProvinceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ProvinceConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -211,6 +291,54 @@ export interface Prisma {
   deleteManyActivitySchedules: (
     where?: ActivityScheduleWhereInput
   ) => BatchPayloadPromise;
+  createAddress: (data: AddressCreateInput) => AddressPromise;
+  updateAddress: (args: {
+    data: AddressUpdateInput;
+    where: AddressWhereUniqueInput;
+  }) => AddressPromise;
+  updateManyAddresses: (args: {
+    data: AddressUpdateManyMutationInput;
+    where?: AddressWhereInput;
+  }) => BatchPayloadPromise;
+  upsertAddress: (args: {
+    where: AddressWhereUniqueInput;
+    create: AddressCreateInput;
+    update: AddressUpdateInput;
+  }) => AddressPromise;
+  deleteAddress: (where: AddressWhereUniqueInput) => AddressPromise;
+  deleteManyAddresses: (where?: AddressWhereInput) => BatchPayloadPromise;
+  createCommune: (data: CommuneCreateInput) => CommunePromise;
+  updateCommune: (args: {
+    data: CommuneUpdateInput;
+    where: CommuneWhereUniqueInput;
+  }) => CommunePromise;
+  updateManyCommunes: (args: {
+    data: CommuneUpdateManyMutationInput;
+    where?: CommuneWhereInput;
+  }) => BatchPayloadPromise;
+  upsertCommune: (args: {
+    where: CommuneWhereUniqueInput;
+    create: CommuneCreateInput;
+    update: CommuneUpdateInput;
+  }) => CommunePromise;
+  deleteCommune: (where: CommuneWhereUniqueInput) => CommunePromise;
+  deleteManyCommunes: (where?: CommuneWhereInput) => BatchPayloadPromise;
+  createDistrict: (data: DistrictCreateInput) => DistrictPromise;
+  updateDistrict: (args: {
+    data: DistrictUpdateInput;
+    where: DistrictWhereUniqueInput;
+  }) => DistrictPromise;
+  updateManyDistricts: (args: {
+    data: DistrictUpdateManyMutationInput;
+    where?: DistrictWhereInput;
+  }) => BatchPayloadPromise;
+  upsertDistrict: (args: {
+    where: DistrictWhereUniqueInput;
+    create: DistrictCreateInput;
+    update: DistrictUpdateInput;
+  }) => DistrictPromise;
+  deleteDistrict: (where: DistrictWhereUniqueInput) => DistrictPromise;
+  deleteManyDistricts: (where?: DistrictWhereInput) => BatchPayloadPromise;
   createGroup: (data: GroupCreateInput) => GroupPromise;
   updateGroup: (args: {
     data: GroupUpdateInput;
@@ -243,6 +371,22 @@ export interface Prisma {
   }) => ProfilePromise;
   deleteProfile: (where: ProfileWhereUniqueInput) => ProfilePromise;
   deleteManyProfiles: (where?: ProfileWhereInput) => BatchPayloadPromise;
+  createProvince: (data: ProvinceCreateInput) => ProvincePromise;
+  updateProvince: (args: {
+    data: ProvinceUpdateInput;
+    where: ProvinceWhereUniqueInput;
+  }) => ProvincePromise;
+  updateManyProvinces: (args: {
+    data: ProvinceUpdateManyMutationInput;
+    where?: ProvinceWhereInput;
+  }) => BatchPayloadPromise;
+  upsertProvince: (args: {
+    where: ProvinceWhereUniqueInput;
+    create: ProvinceCreateInput;
+    update: ProvinceUpdateInput;
+  }) => ProvincePromise;
+  deleteProvince: (where: ProvinceWhereUniqueInput) => ProvincePromise;
+  deleteManyProvinces: (where?: ProvinceWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -261,12 +405,24 @@ export interface Subscription {
   activitySchedule: (
     where?: ActivityScheduleSubscriptionWhereInput
   ) => ActivityScheduleSubscriptionPayloadSubscription;
+  address: (
+    where?: AddressSubscriptionWhereInput
+  ) => AddressSubscriptionPayloadSubscription;
+  commune: (
+    where?: CommuneSubscriptionWhereInput
+  ) => CommuneSubscriptionPayloadSubscription;
+  district: (
+    where?: DistrictSubscriptionWhereInput
+  ) => DistrictSubscriptionPayloadSubscription;
   group: (
     where?: GroupSubscriptionWhereInput
   ) => GroupSubscriptionPayloadSubscription;
   profile: (
     where?: ProfileSubscriptionWhereInput
   ) => ProfileSubscriptionPayloadSubscription;
+  province: (
+    where?: ProvinceSubscriptionWhereInput
+  ) => ProvinceSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -276,6 +432,16 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type ActivityListOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type ActivityScheduleOrderByInput =
   | "id_ASC"
@@ -299,6 +465,26 @@ export type ActivityAttendanceOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type CommuneOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type DistrictOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type ProfileOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -310,8 +496,16 @@ export type ProfileOrderByInput =
   | "lastName_DESC"
   | "gender_ASC"
   | "gender_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "facebookId_ASC"
+  | "facebookId_DESC"
   | "phoneNumber_ASC"
   | "phoneNumber_DESC"
+  | "birthday_ASC"
+  | "birthday_DESC"
+  | "joinDate_ASC"
+  | "joinDate_DESC"
   | "dayOfBirth_ASC"
   | "dayOfBirth_DESC"
   | "monthOfBirth_ASC"
@@ -323,11 +517,15 @@ export type ProfileOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type ActivityListOrderByInput =
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type AddressOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
+  | "no_ASC"
+  | "no_DESC"
+  | "street_ASC"
+  | "street_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -343,23 +541,59 @@ export type GroupOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export type ProvinceOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
-export interface GroupUpdateWithoutMembersDataInput {
+export interface DistrictUpdateWithoutCommunesDataInput {
   name?: String;
-  leader?: ProfileUpdateOneWithoutLeaderInput;
+  province?: ProvinceUpdateOneRequiredWithoutDistrictsInput;
 }
 
 export type ActivityAttendanceWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface ActivityAttendanceUpdateWithWhereUniqueWithoutMemberInput {
-  where: ActivityAttendanceWhereUniqueInput;
-  data: ActivityAttendanceUpdateWithoutMemberDataInput;
+export interface GroupCreateOneWithoutMembersInput {
+  create?: GroupCreateWithoutMembersInput;
+  connect?: GroupWhereUniqueInput;
 }
 
-export interface ActivityListWhereInput {
+export interface ActivityScheduleCreateManyWithoutActivityInput {
+  create?:
+    | ActivityScheduleCreateWithoutActivityInput[]
+    | ActivityScheduleCreateWithoutActivityInput;
+  connect?:
+    | ActivityScheduleWhereUniqueInput[]
+    | ActivityScheduleWhereUniqueInput;
+}
+
+export interface GroupCreateWithoutMembersInput {
+  name: String;
+  leader?: ProfileCreateOneWithoutLeaderInput;
+}
+
+export interface DistrictUpdateOneInput {
+  create?: DistrictCreateInput;
+  update?: DistrictUpdateDataInput;
+  upsert?: DistrictUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: DistrictWhereUniqueInput;
+}
+
+export interface ProfileCreateOneWithoutLeaderInput {
+  create?: ProfileCreateWithoutLeaderInput;
+  connect?: ProfileWhereUniqueInput;
+}
+
+export interface DistrictWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -388,17 +622,79 @@ export interface ActivityListWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
-  schedules_every?: ActivityScheduleWhereInput;
-  schedules_some?: ActivityScheduleWhereInput;
-  schedules_none?: ActivityScheduleWhereInput;
-  AND?: ActivityListWhereInput[] | ActivityListWhereInput;
-  OR?: ActivityListWhereInput[] | ActivityListWhereInput;
-  NOT?: ActivityListWhereInput[] | ActivityListWhereInput;
+  communes_every?: CommuneWhereInput;
+  communes_some?: CommuneWhereInput;
+  communes_none?: CommuneWhereInput;
+  province?: ProvinceWhereInput;
+  AND?: DistrictWhereInput[] | DistrictWhereInput;
+  OR?: DistrictWhereInput[] | DistrictWhereInput;
+  NOT?: DistrictWhereInput[] | DistrictWhereInput;
 }
 
-export interface ActivityAttendanceUpdateWithoutMemberDataInput {
-  schedule?: ActivityScheduleUpdateOneRequiredWithoutAttendancesInput;
-  presence?: Boolean;
+export interface ProfileCreateWithoutLeaderInput {
+  oldId: ID_Input;
+  firstName: String;
+  lastName: String;
+  gender: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+  address?: AddressCreateOneInput;
+  hometown?: ProvinceCreateOneInput;
+  group?: GroupCreateOneWithoutMembersInput;
+  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
+}
+
+export interface GroupWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  members_every?: ProfileWhereInput;
+  members_some?: ProfileWhereInput;
+  members_none?: ProfileWhereInput;
+  leader?: ProfileWhereInput;
+  AND?: GroupWhereInput[] | GroupWhereInput;
+  OR?: GroupWhereInput[] | GroupWhereInput;
+  NOT?: GroupWhereInput[] | GroupWhereInput;
+}
+
+export interface ActivityAttendanceCreateManyWithoutMemberInput {
+  create?:
+    | ActivityAttendanceCreateWithoutMemberInput[]
+    | ActivityAttendanceCreateWithoutMemberInput;
+  connect?:
+    | ActivityAttendanceWhereUniqueInput[]
+    | ActivityAttendanceWhereUniqueInput;
 }
 
 export interface ProfileWhereInput {
@@ -460,6 +756,34 @@ export interface ProfileWhereInput {
   lastName_not_ends_with?: String;
   gender?: Boolean;
   gender_not?: Boolean;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  facebookId?: String;
+  facebookId_not?: String;
+  facebookId_in?: String[] | String;
+  facebookId_not_in?: String[] | String;
+  facebookId_lt?: String;
+  facebookId_lte?: String;
+  facebookId_gt?: String;
+  facebookId_gte?: String;
+  facebookId_contains?: String;
+  facebookId_not_contains?: String;
+  facebookId_starts_with?: String;
+  facebookId_not_starts_with?: String;
+  facebookId_ends_with?: String;
+  facebookId_not_ends_with?: String;
   phoneNumber?: String;
   phoneNumber_not?: String;
   phoneNumber_in?: String[] | String;
@@ -474,6 +798,22 @@ export interface ProfileWhereInput {
   phoneNumber_not_starts_with?: String;
   phoneNumber_ends_with?: String;
   phoneNumber_not_ends_with?: String;
+  birthday?: DateTimeInput;
+  birthday_not?: DateTimeInput;
+  birthday_in?: DateTimeInput[] | DateTimeInput;
+  birthday_not_in?: DateTimeInput[] | DateTimeInput;
+  birthday_lt?: DateTimeInput;
+  birthday_lte?: DateTimeInput;
+  birthday_gt?: DateTimeInput;
+  birthday_gte?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  joinDate_not?: DateTimeInput;
+  joinDate_in?: DateTimeInput[] | DateTimeInput;
+  joinDate_not_in?: DateTimeInput[] | DateTimeInput;
+  joinDate_lt?: DateTimeInput;
+  joinDate_lte?: DateTimeInput;
+  joinDate_gt?: DateTimeInput;
+  joinDate_gte?: DateTimeInput;
   dayOfBirth?: Int;
   dayOfBirth_not?: Int;
   dayOfBirth_in?: Int[] | Int;
@@ -498,6 +838,8 @@ export interface ProfileWhereInput {
   yearOfBirth_lte?: Int;
   yearOfBirth_gt?: Int;
   yearOfBirth_gte?: Int;
+  address?: AddressWhereInput;
+  hometown?: ProvinceWhereInput;
   group?: GroupWhereInput;
   leader?: GroupWhereInput;
   attendances_every?: ActivityAttendanceWhereInput;
@@ -508,57 +850,57 @@ export interface ProfileWhereInput {
   NOT?: ProfileWhereInput[] | ProfileWhereInput;
 }
 
-export interface ProfileCreateManyWithoutGroupInput {
-  create?: ProfileCreateWithoutGroupInput[] | ProfileCreateWithoutGroupInput;
-  connect?: ProfileWhereUniqueInput[] | ProfileWhereUniqueInput;
+export interface ActivityAttendanceCreateWithoutMemberInput {
+  schedule: ActivityScheduleCreateOneWithoutAttendancesInput;
+  presence: Boolean;
 }
 
-export interface ActivityListUpdateInput {
-  name?: String;
-  schedules?: ActivityScheduleUpdateManyWithoutActivityInput;
-}
-
-export interface ProfileCreateWithoutGroupInput {
-  oldId: ID_Input;
-  firstName: String;
-  lastName: String;
-  gender: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-  leader?: GroupCreateOneWithoutLeaderInput;
-  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
-}
-
-export interface ActivityAttendanceUpsertWithWhereUniqueWithoutMemberInput {
-  where: ActivityAttendanceWhereUniqueInput;
-  update: ActivityAttendanceUpdateWithoutMemberDataInput;
-  create: ActivityAttendanceCreateWithoutMemberInput;
-}
-
-export interface ActivityAttendanceUpdateInput {
-  schedule?: ActivityScheduleUpdateOneRequiredWithoutAttendancesInput;
-  member?: ProfileUpdateOneRequiredWithoutAttendancesInput;
-  presence?: Boolean;
-}
-
-export interface ProfileSubscriptionWhereInput {
+export interface GroupSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: ProfileWhereInput;
-  AND?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
-  OR?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
-  NOT?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
+  node?: GroupWhereInput;
+  AND?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
+  OR?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
+  NOT?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
 }
 
-export interface ActivityScheduleUpdateOneRequiredWithoutAttendancesInput {
-  create?: ActivityScheduleCreateWithoutAttendancesInput;
-  update?: ActivityScheduleUpdateWithoutAttendancesDataInput;
-  upsert?: ActivityScheduleUpsertWithoutAttendancesInput;
-  connect?: ActivityScheduleWhereUniqueInput;
+export interface GroupCreateOneWithoutLeaderInput {
+  create?: GroupCreateWithoutLeaderInput;
+  connect?: GroupWhereUniqueInput;
+}
+
+export interface CommuneSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: CommuneWhereInput;
+  AND?: CommuneSubscriptionWhereInput[] | CommuneSubscriptionWhereInput;
+  OR?: CommuneSubscriptionWhereInput[] | CommuneSubscriptionWhereInput;
+  NOT?: CommuneSubscriptionWhereInput[] | CommuneSubscriptionWhereInput;
+}
+
+export interface GroupCreateWithoutLeaderInput {
+  name: String;
+  members?: ProfileCreateManyWithoutGroupInput;
+}
+
+export interface AddressSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AddressWhereInput;
+  AND?: AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput;
+  OR?: AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput;
+  NOT?: AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput;
+}
+
+export interface ProfileCreateManyWithoutGroupInput {
+  create?: ProfileCreateWithoutGroupInput[] | ProfileCreateWithoutGroupInput;
+  connect?: ProfileWhereUniqueInput[] | ProfileWhereUniqueInput;
 }
 
 export interface ActivityScheduleSubscriptionWhereInput {
@@ -578,27 +920,87 @@ export interface ActivityScheduleSubscriptionWhereInput {
     | ActivityScheduleSubscriptionWhereInput;
 }
 
+export interface ProfileCreateWithoutGroupInput {
+  oldId: ID_Input;
+  firstName: String;
+  lastName: String;
+  gender: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+  address?: AddressCreateOneInput;
+  hometown?: ProvinceCreateOneInput;
+  leader?: GroupCreateOneWithoutLeaderInput;
+  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
+}
+
+export interface ActivityListSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ActivityListWhereInput;
+  AND?:
+    | ActivityListSubscriptionWhereInput[]
+    | ActivityListSubscriptionWhereInput;
+  OR?:
+    | ActivityListSubscriptionWhereInput[]
+    | ActivityListSubscriptionWhereInput;
+  NOT?:
+    | ActivityListSubscriptionWhereInput[]
+    | ActivityListSubscriptionWhereInput;
+}
+
+export interface ActivityAttendanceUpdateInput {
+  schedule?: ActivityScheduleUpdateOneRequiredWithoutAttendancesInput;
+  member?: ProfileUpdateOneRequiredWithoutAttendancesInput;
+  presence?: Boolean;
+}
+
+export interface ProvinceUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface ActivityScheduleUpdateOneRequiredWithoutAttendancesInput {
+  create?: ActivityScheduleCreateWithoutAttendancesInput;
+  update?: ActivityScheduleUpdateWithoutAttendancesDataInput;
+  upsert?: ActivityScheduleUpsertWithoutAttendancesInput;
+  connect?: ActivityScheduleWhereUniqueInput;
+}
+
+export type ActivityListWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
 export interface ActivityScheduleUpdateWithoutAttendancesDataInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   activity?: ActivityListUpdateOneRequiredWithoutSchedulesInput;
 }
 
-export interface ActivityAttendanceSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ActivityAttendanceWhereInput;
-  AND?:
-    | ActivityAttendanceSubscriptionWhereInput[]
-    | ActivityAttendanceSubscriptionWhereInput;
-  OR?:
-    | ActivityAttendanceSubscriptionWhereInput[]
-    | ActivityAttendanceSubscriptionWhereInput;
-  NOT?:
-    | ActivityAttendanceSubscriptionWhereInput[]
-    | ActivityAttendanceSubscriptionWhereInput;
+export interface ProfileUpdateInput {
+  oldId?: ID_Input;
+  firstName?: String;
+  lastName?: String;
+  gender?: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+  address?: AddressUpdateOneInput;
+  hometown?: ProvinceUpdateOneInput;
+  group?: GroupUpdateOneWithoutMembersInput;
+  leader?: GroupUpdateOneWithoutLeaderInput;
+  attendances?: ActivityAttendanceUpdateManyWithoutMemberInput;
 }
 
 export interface ActivityListUpdateOneRequiredWithoutSchedulesInput {
@@ -608,31 +1010,12 @@ export interface ActivityListUpdateOneRequiredWithoutSchedulesInput {
   connect?: ActivityListWhereUniqueInput;
 }
 
-export interface ProfileUpdateInput {
-  oldId?: ID_Input;
-  firstName?: String;
-  lastName?: String;
-  gender?: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-  group?: GroupUpdateOneWithoutMembersInput;
-  leader?: GroupUpdateOneWithoutLeaderInput;
-  attendances?: ActivityAttendanceUpdateManyWithoutMemberInput;
+export interface GroupUpdateManyMutationInput {
+  name?: String;
 }
 
 export interface ActivityListUpdateWithoutSchedulesDataInput {
   name?: String;
-}
-
-export type ActivityListWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface ActivityListUpsertWithoutSchedulesInput {
-  update: ActivityListUpdateWithoutSchedulesDataInput;
-  create: ActivityListCreateWithoutSchedulesInput;
 }
 
 export interface GroupUpdateInput {
@@ -641,14 +1024,24 @@ export interface GroupUpdateInput {
   leader?: ProfileUpdateOneWithoutLeaderInput;
 }
 
+export interface ActivityListUpsertWithoutSchedulesInput {
+  update: ActivityListUpdateWithoutSchedulesDataInput;
+  create: ActivityListCreateWithoutSchedulesInput;
+}
+
+export interface DistrictUpdateManyMutationInput {
+  name?: String;
+}
+
 export interface ActivityScheduleUpsertWithoutAttendancesInput {
   update: ActivityScheduleUpdateWithoutAttendancesDataInput;
   create: ActivityScheduleCreateWithoutAttendancesInput;
 }
 
-export interface ActivityScheduleUpdateManyMutationInput {
-  start?: DateTimeInput;
-  end?: DateTimeInput;
+export interface DistrictUpdateInput {
+  name?: String;
+  communes?: CommuneUpdateManyWithoutDistrictInput;
+  province?: ProvinceUpdateOneRequiredWithoutDistrictsInput;
 }
 
 export interface ProfileUpdateOneRequiredWithoutAttendancesInput {
@@ -658,11 +1051,9 @@ export interface ProfileUpdateOneRequiredWithoutAttendancesInput {
   connect?: ProfileWhereUniqueInput;
 }
 
-export interface ActivityScheduleUpdateInput {
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  activity?: ActivityListUpdateOneRequiredWithoutSchedulesInput;
-  attendances?: ActivityAttendanceUpdateManyWithoutScheduleInput;
+export interface CommuneUpdateInput {
+  name?: String;
+  district?: DistrictUpdateOneRequiredWithoutCommunesInput;
 }
 
 export interface ProfileUpdateWithoutAttendancesDataInput {
@@ -670,57 +1061,77 @@ export interface ProfileUpdateWithoutAttendancesDataInput {
   firstName?: String;
   lastName?: String;
   gender?: Boolean;
+  email?: String;
+  facebookId?: String;
   phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
   dayOfBirth?: Int;
   monthOfBirth?: Int;
   yearOfBirth?: Int;
+  address?: AddressUpdateOneInput;
+  hometown?: ProvinceUpdateOneInput;
   group?: GroupUpdateOneWithoutMembersInput;
   leader?: GroupUpdateOneWithoutLeaderInput;
+}
+
+export type CommuneWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface AddressUpdateOneInput {
+  create?: AddressCreateInput;
+  update?: AddressUpdateDataInput;
+  upsert?: AddressUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: AddressWhereUniqueInput;
+}
+
+export interface ActivityScheduleUpdateManyMutationInput {
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+}
+
+export interface AddressUpdateDataInput {
+  no?: String;
+  street?: String;
+  commune?: CommuneUpdateOneInput;
+  district?: DistrictUpdateOneInput;
+  province?: ProvinceUpdateOneInput;
+}
+
+export type DistrictWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface CommuneUpdateOneInput {
+  create?: CommuneCreateInput;
+  update?: CommuneUpdateDataInput;
+  upsert?: CommuneUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: CommuneWhereUniqueInput;
 }
 
 export interface ActivityListUpdateManyMutationInput {
   name?: String;
 }
 
-export interface GroupUpdateOneWithoutMembersInput {
-  create?: GroupCreateWithoutMembersInput;
-  update?: GroupUpdateWithoutMembersDataInput;
-  upsert?: GroupUpsertWithoutMembersInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: GroupWhereUniqueInput;
+export interface CommuneUpdateDataInput {
+  name?: String;
+  district?: DistrictUpdateOneRequiredWithoutCommunesInput;
 }
 
-export interface ActivityScheduleUpdateManyDataInput {
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-}
+export type GroupWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
-export interface ActivityAttendanceUpdateManyWithoutScheduleInput {
-  create?:
-    | ActivityAttendanceCreateWithoutScheduleInput[]
-    | ActivityAttendanceCreateWithoutScheduleInput;
-  delete?:
-    | ActivityAttendanceWhereUniqueInput[]
-    | ActivityAttendanceWhereUniqueInput;
-  connect?:
-    | ActivityAttendanceWhereUniqueInput[]
-    | ActivityAttendanceWhereUniqueInput;
-  disconnect?:
-    | ActivityAttendanceWhereUniqueInput[]
-    | ActivityAttendanceWhereUniqueInput;
-  update?:
-    | ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput[]
-    | ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput;
-  upsert?:
-    | ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput[]
-    | ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput;
-  deleteMany?:
-    | ActivityAttendanceScalarWhereInput[]
-    | ActivityAttendanceScalarWhereInput;
-  updateMany?:
-    | ActivityAttendanceUpdateManyWithWhereNestedInput[]
-    | ActivityAttendanceUpdateManyWithWhereNestedInput;
+export interface DistrictUpdateOneRequiredWithoutCommunesInput {
+  create?: DistrictCreateWithoutCommunesInput;
+  update?: DistrictUpdateWithoutCommunesDataInput;
+  upsert?: DistrictUpsertWithoutCommunesInput;
+  connect?: DistrictWhereUniqueInput;
 }
 
 export interface ActivityScheduleScalarWhereInput {
@@ -759,6 +1170,584 @@ export interface ActivityScheduleScalarWhereInput {
   NOT?: ActivityScheduleScalarWhereInput[] | ActivityScheduleScalarWhereInput;
 }
 
+export interface ActivityAttendanceCreateWithoutScheduleInput {
+  member: ProfileCreateOneWithoutAttendancesInput;
+  presence: Boolean;
+}
+
+export interface ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput {
+  where: ActivityAttendanceWhereUniqueInput;
+  update: ActivityAttendanceUpdateWithoutScheduleDataInput;
+  create: ActivityAttendanceCreateWithoutScheduleInput;
+}
+
+export interface ProvinceUpdateOneRequiredWithoutDistrictsInput {
+  create?: ProvinceCreateWithoutDistrictsInput;
+  update?: ProvinceUpdateWithoutDistrictsDataInput;
+  upsert?: ProvinceUpsertWithoutDistrictsInput;
+  connect?: ProvinceWhereUniqueInput;
+}
+
+export interface ActivityAttendanceUpdateWithoutScheduleDataInput {
+  member?: ProfileUpdateOneRequiredWithoutAttendancesInput;
+  presence?: Boolean;
+}
+
+export interface ProvinceUpdateWithoutDistrictsDataInput {
+  name?: String;
+}
+
+export interface ActivityAttendanceUpdateManyWithoutScheduleInput {
+  create?:
+    | ActivityAttendanceCreateWithoutScheduleInput[]
+    | ActivityAttendanceCreateWithoutScheduleInput;
+  delete?:
+    | ActivityAttendanceWhereUniqueInput[]
+    | ActivityAttendanceWhereUniqueInput;
+  connect?:
+    | ActivityAttendanceWhereUniqueInput[]
+    | ActivityAttendanceWhereUniqueInput;
+  disconnect?:
+    | ActivityAttendanceWhereUniqueInput[]
+    | ActivityAttendanceWhereUniqueInput;
+  update?:
+    | ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput[]
+    | ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput;
+  upsert?:
+    | ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput[]
+    | ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput;
+  deleteMany?:
+    | ActivityAttendanceScalarWhereInput[]
+    | ActivityAttendanceScalarWhereInput;
+  updateMany?:
+    | ActivityAttendanceUpdateManyWithWhereNestedInput[]
+    | ActivityAttendanceUpdateManyWithWhereNestedInput;
+}
+
+export interface ProvinceUpsertWithoutDistrictsInput {
+  update: ProvinceUpdateWithoutDistrictsDataInput;
+  create: ProvinceCreateWithoutDistrictsInput;
+}
+
+export interface ActivityScheduleUpdateWithoutActivityDataInput {
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  attendances?: ActivityAttendanceUpdateManyWithoutScheduleInput;
+}
+
+export interface DistrictUpsertWithoutCommunesInput {
+  update: DistrictUpdateWithoutCommunesDataInput;
+  create: DistrictCreateWithoutCommunesInput;
+}
+
+export interface ActivityScheduleUpdateManyWithoutActivityInput {
+  create?:
+    | ActivityScheduleCreateWithoutActivityInput[]
+    | ActivityScheduleCreateWithoutActivityInput;
+  delete?:
+    | ActivityScheduleWhereUniqueInput[]
+    | ActivityScheduleWhereUniqueInput;
+  connect?:
+    | ActivityScheduleWhereUniqueInput[]
+    | ActivityScheduleWhereUniqueInput;
+  disconnect?:
+    | ActivityScheduleWhereUniqueInput[]
+    | ActivityScheduleWhereUniqueInput;
+  update?:
+    | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput[]
+    | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput;
+  upsert?:
+    | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput[]
+    | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput;
+  deleteMany?:
+    | ActivityScheduleScalarWhereInput[]
+    | ActivityScheduleScalarWhereInput;
+  updateMany?:
+    | ActivityScheduleUpdateManyWithWhereNestedInput[]
+    | ActivityScheduleUpdateManyWithWhereNestedInput;
+}
+
+export interface CommuneUpsertNestedInput {
+  update: CommuneUpdateDataInput;
+  create: CommuneCreateInput;
+}
+
+export interface ActivityScheduleCreateOneWithoutAttendancesInput {
+  create?: ActivityScheduleCreateWithoutAttendancesInput;
+  connect?: ActivityScheduleWhereUniqueInput;
+}
+
+export interface AddressWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  no?: String;
+  no_not?: String;
+  no_in?: String[] | String;
+  no_not_in?: String[] | String;
+  no_lt?: String;
+  no_lte?: String;
+  no_gt?: String;
+  no_gte?: String;
+  no_contains?: String;
+  no_not_contains?: String;
+  no_starts_with?: String;
+  no_not_starts_with?: String;
+  no_ends_with?: String;
+  no_not_ends_with?: String;
+  street?: String;
+  street_not?: String;
+  street_in?: String[] | String;
+  street_not_in?: String[] | String;
+  street_lt?: String;
+  street_lte?: String;
+  street_gt?: String;
+  street_gte?: String;
+  street_contains?: String;
+  street_not_contains?: String;
+  street_starts_with?: String;
+  street_not_starts_with?: String;
+  street_ends_with?: String;
+  street_not_ends_with?: String;
+  commune?: CommuneWhereInput;
+  district?: DistrictWhereInput;
+  province?: ProvinceWhereInput;
+  AND?: AddressWhereInput[] | AddressWhereInput;
+  OR?: AddressWhereInput[] | AddressWhereInput;
+  NOT?: AddressWhereInput[] | AddressWhereInput;
+}
+
+export interface ActivityListCreateOneWithoutSchedulesInput {
+  create?: ActivityListCreateWithoutSchedulesInput;
+  connect?: ActivityListWhereUniqueInput;
+}
+
+export interface DistrictUpdateDataInput {
+  name?: String;
+  communes?: CommuneUpdateManyWithoutDistrictInput;
+  province?: ProvinceUpdateOneRequiredWithoutDistrictsInput;
+}
+
+export interface ProfileCreateOneWithoutAttendancesInput {
+  create?: ProfileCreateWithoutAttendancesInput;
+  connect?: ProfileWhereUniqueInput;
+}
+
+export interface CommuneUpdateManyWithoutDistrictInput {
+  create?:
+    | CommuneCreateWithoutDistrictInput[]
+    | CommuneCreateWithoutDistrictInput;
+  delete?: CommuneWhereUniqueInput[] | CommuneWhereUniqueInput;
+  connect?: CommuneWhereUniqueInput[] | CommuneWhereUniqueInput;
+  disconnect?: CommuneWhereUniqueInput[] | CommuneWhereUniqueInput;
+  update?:
+    | CommuneUpdateWithWhereUniqueWithoutDistrictInput[]
+    | CommuneUpdateWithWhereUniqueWithoutDistrictInput;
+  upsert?:
+    | CommuneUpsertWithWhereUniqueWithoutDistrictInput[]
+    | CommuneUpsertWithWhereUniqueWithoutDistrictInput;
+  deleteMany?: CommuneScalarWhereInput[] | CommuneScalarWhereInput;
+  updateMany?:
+    | CommuneUpdateManyWithWhereNestedInput[]
+    | CommuneUpdateManyWithWhereNestedInput;
+}
+
+export interface AddressCreateOneInput {
+  create?: AddressCreateInput;
+  connect?: AddressWhereUniqueInput;
+}
+
+export interface CommuneUpdateWithWhereUniqueWithoutDistrictInput {
+  where: CommuneWhereUniqueInput;
+  data: CommuneUpdateWithoutDistrictDataInput;
+}
+
+export interface CommuneCreateOneInput {
+  create?: CommuneCreateInput;
+  connect?: CommuneWhereUniqueInput;
+}
+
+export interface CommuneUpdateWithoutDistrictDataInput {
+  name?: String;
+}
+
+export interface DistrictCreateOneWithoutCommunesInput {
+  create?: DistrictCreateWithoutCommunesInput;
+  connect?: DistrictWhereUniqueInput;
+}
+
+export interface CommuneUpsertWithWhereUniqueWithoutDistrictInput {
+  where: CommuneWhereUniqueInput;
+  update: CommuneUpdateWithoutDistrictDataInput;
+  create: CommuneCreateWithoutDistrictInput;
+}
+
+export interface ProvinceCreateOneWithoutDistrictsInput {
+  create?: ProvinceCreateWithoutDistrictsInput;
+  connect?: ProvinceWhereUniqueInput;
+}
+
+export interface CommuneScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: CommuneScalarWhereInput[] | CommuneScalarWhereInput;
+  OR?: CommuneScalarWhereInput[] | CommuneScalarWhereInput;
+  NOT?: CommuneScalarWhereInput[] | CommuneScalarWhereInput;
+}
+
+export interface DistrictCreateOneInput {
+  create?: DistrictCreateInput;
+  connect?: DistrictWhereUniqueInput;
+}
+
+export interface CommuneUpdateManyWithWhereNestedInput {
+  where: CommuneScalarWhereInput;
+  data: CommuneUpdateManyDataInput;
+}
+
+export interface CommuneCreateManyWithoutDistrictInput {
+  create?:
+    | CommuneCreateWithoutDistrictInput[]
+    | CommuneCreateWithoutDistrictInput;
+  connect?: CommuneWhereUniqueInput[] | CommuneWhereUniqueInput;
+}
+
+export interface CommuneUpdateManyDataInput {
+  name?: String;
+}
+
+export interface ProvinceCreateOneInput {
+  create?: ProvinceCreateInput;
+  connect?: ProvinceWhereUniqueInput;
+}
+
+export interface DistrictUpsertNestedInput {
+  update: DistrictUpdateDataInput;
+  create: DistrictCreateInput;
+}
+
+export interface DistrictCreateManyWithoutProvinceInput {
+  create?:
+    | DistrictCreateWithoutProvinceInput[]
+    | DistrictCreateWithoutProvinceInput;
+  connect?: DistrictWhereUniqueInput[] | DistrictWhereUniqueInput;
+}
+
+export interface ProvinceUpdateOneInput {
+  create?: ProvinceCreateInput;
+  update?: ProvinceUpdateDataInput;
+  upsert?: ProvinceUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: ProvinceWhereUniqueInput;
+}
+
+export interface CommuneWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  district?: DistrictWhereInput;
+  AND?: CommuneWhereInput[] | CommuneWhereInput;
+  OR?: CommuneWhereInput[] | CommuneWhereInput;
+  NOT?: CommuneWhereInput[] | CommuneWhereInput;
+}
+
+export interface ProvinceUpdateDataInput {
+  name?: String;
+  districts?: DistrictUpdateManyWithoutProvinceInput;
+}
+
+export interface ProvinceSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ProvinceWhereInput;
+  AND?: ProvinceSubscriptionWhereInput[] | ProvinceSubscriptionWhereInput;
+  OR?: ProvinceSubscriptionWhereInput[] | ProvinceSubscriptionWhereInput;
+  NOT?: ProvinceSubscriptionWhereInput[] | ProvinceSubscriptionWhereInput;
+}
+
+export interface DistrictUpdateManyWithoutProvinceInput {
+  create?:
+    | DistrictCreateWithoutProvinceInput[]
+    | DistrictCreateWithoutProvinceInput;
+  delete?: DistrictWhereUniqueInput[] | DistrictWhereUniqueInput;
+  connect?: DistrictWhereUniqueInput[] | DistrictWhereUniqueInput;
+  disconnect?: DistrictWhereUniqueInput[] | DistrictWhereUniqueInput;
+  update?:
+    | DistrictUpdateWithWhereUniqueWithoutProvinceInput[]
+    | DistrictUpdateWithWhereUniqueWithoutProvinceInput;
+  upsert?:
+    | DistrictUpsertWithWhereUniqueWithoutProvinceInput[]
+    | DistrictUpsertWithWhereUniqueWithoutProvinceInput;
+  deleteMany?: DistrictScalarWhereInput[] | DistrictScalarWhereInput;
+  updateMany?:
+    | DistrictUpdateManyWithWhereNestedInput[]
+    | DistrictUpdateManyWithWhereNestedInput;
+}
+
+export interface DistrictSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: DistrictWhereInput;
+  AND?: DistrictSubscriptionWhereInput[] | DistrictSubscriptionWhereInput;
+  OR?: DistrictSubscriptionWhereInput[] | DistrictSubscriptionWhereInput;
+  NOT?: DistrictSubscriptionWhereInput[] | DistrictSubscriptionWhereInput;
+}
+
+export interface DistrictUpdateWithWhereUniqueWithoutProvinceInput {
+  where: DistrictWhereUniqueInput;
+  data: DistrictUpdateWithoutProvinceDataInput;
+}
+
+export interface ActivityListWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  schedules_every?: ActivityScheduleWhereInput;
+  schedules_some?: ActivityScheduleWhereInput;
+  schedules_none?: ActivityScheduleWhereInput;
+  AND?: ActivityListWhereInput[] | ActivityListWhereInput;
+  OR?: ActivityListWhereInput[] | ActivityListWhereInput;
+  NOT?: ActivityListWhereInput[] | ActivityListWhereInput;
+}
+
+export interface DistrictUpdateWithoutProvinceDataInput {
+  name?: String;
+  communes?: CommuneUpdateManyWithoutDistrictInput;
+}
+
+export interface ActivityAttendanceSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ActivityAttendanceWhereInput;
+  AND?:
+    | ActivityAttendanceSubscriptionWhereInput[]
+    | ActivityAttendanceSubscriptionWhereInput;
+  OR?:
+    | ActivityAttendanceSubscriptionWhereInput[]
+    | ActivityAttendanceSubscriptionWhereInput;
+  NOT?:
+    | ActivityAttendanceSubscriptionWhereInput[]
+    | ActivityAttendanceSubscriptionWhereInput;
+}
+
+export interface DistrictUpsertWithWhereUniqueWithoutProvinceInput {
+  where: DistrictWhereUniqueInput;
+  update: DistrictUpdateWithoutProvinceDataInput;
+  create: DistrictCreateWithoutProvinceInput;
+}
+
+export interface ProfileUpdateManyMutationInput {
+  oldId?: ID_Input;
+  firstName?: String;
+  lastName?: String;
+  gender?: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+}
+
+export interface DistrictScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: DistrictScalarWhereInput[] | DistrictScalarWhereInput;
+  OR?: DistrictScalarWhereInput[] | DistrictScalarWhereInput;
+  NOT?: DistrictScalarWhereInput[] | DistrictScalarWhereInput;
+}
+
+export type ActivityScheduleWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface DistrictUpdateManyWithWhereNestedInput {
+  where: DistrictScalarWhereInput;
+  data: DistrictUpdateManyDataInput;
+}
+
+export type AddressWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface DistrictUpdateManyDataInput {
+  name?: String;
+}
+
+export interface AddressUpdateManyMutationInput {
+  no?: String;
+  street?: String;
+}
+
+export interface ProvinceUpsertNestedInput {
+  update: ProvinceUpdateDataInput;
+  create: ProvinceCreateInput;
+}
+
+export interface ActivityScheduleUpdateInput {
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  activity?: ActivityListUpdateOneRequiredWithoutSchedulesInput;
+  attendances?: ActivityAttendanceUpdateManyWithoutScheduleInput;
+}
+
+export interface AddressUpsertNestedInput {
+  update: AddressUpdateDataInput;
+  create: AddressCreateInput;
+}
+
+export interface ActivityScheduleUpdateManyDataInput {
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+}
+
+export interface GroupUpdateOneWithoutMembersInput {
+  create?: GroupCreateWithoutMembersInput;
+  update?: GroupUpdateWithoutMembersDataInput;
+  upsert?: GroupUpsertWithoutMembersInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: GroupWhereUniqueInput;
+}
+
+export interface ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput {
+  where: ActivityScheduleWhereUniqueInput;
+  update: ActivityScheduleUpdateWithoutActivityDataInput;
+  create: ActivityScheduleCreateWithoutActivityInput;
+}
+
+export interface GroupUpdateWithoutMembersDataInput {
+  name?: String;
+  leader?: ProfileUpdateOneWithoutLeaderInput;
+}
+
+export interface ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput {
+  where: ActivityAttendanceWhereUniqueInput;
+  data: ActivityAttendanceUpdateWithoutScheduleDataInput;
+}
+
 export interface ProfileUpdateOneWithoutLeaderInput {
   create?: ProfileCreateWithoutLeaderInput;
   update?: ProfileUpdateWithoutLeaderDataInput;
@@ -768,27 +1757,34 @@ export interface ProfileUpdateOneWithoutLeaderInput {
   connect?: ProfileWhereUniqueInput;
 }
 
-export type ProfileWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  oldId?: ID_Input;
-}>;
+export interface ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput {
+  where: ActivityScheduleWhereUniqueInput;
+  data: ActivityScheduleUpdateWithoutActivityDataInput;
+}
 
 export interface ProfileUpdateWithoutLeaderDataInput {
   oldId?: ID_Input;
   firstName?: String;
   lastName?: String;
   gender?: Boolean;
+  email?: String;
+  facebookId?: String;
   phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
   dayOfBirth?: Int;
   monthOfBirth?: Int;
   yearOfBirth?: Int;
+  address?: AddressUpdateOneInput;
+  hometown?: ProvinceUpdateOneInput;
   group?: GroupUpdateOneWithoutMembersInput;
   attendances?: ActivityAttendanceUpdateManyWithoutMemberInput;
 }
 
-export interface ActivityAttendanceUpdateWithoutScheduleDataInput {
-  member?: ProfileUpdateOneRequiredWithoutAttendancesInput;
-  presence?: Boolean;
+export interface ActivityAttendanceCreateInput {
+  schedule: ActivityScheduleCreateOneWithoutAttendancesInput;
+  member: ProfileCreateOneWithoutAttendancesInput;
+  presence: Boolean;
 }
 
 export interface ActivityAttendanceUpdateManyWithoutMemberInput {
@@ -818,92 +1814,43 @@ export interface ActivityAttendanceUpdateManyWithoutMemberInput {
     | ActivityAttendanceUpdateManyWithWhereNestedInput;
 }
 
-export interface ActivityScheduleCreateOneWithoutAttendancesInput {
-  create?: ActivityScheduleCreateWithoutAttendancesInput;
-  connect?: ActivityScheduleWhereUniqueInput;
+export interface ActivityListCreateWithoutSchedulesInput {
+  name: String;
 }
 
-export interface ActivityAttendanceWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  schedule?: ActivityScheduleWhereInput;
-  member?: ProfileWhereInput;
+export interface ActivityAttendanceUpdateWithWhereUniqueWithoutMemberInput {
+  where: ActivityAttendanceWhereUniqueInput;
+  data: ActivityAttendanceUpdateWithoutMemberDataInput;
+}
+
+export interface AddressCreateInput {
+  no?: String;
+  street?: String;
+  commune?: CommuneCreateOneInput;
+  district?: DistrictCreateOneInput;
+  province?: ProvinceCreateOneInput;
+}
+
+export interface ActivityAttendanceUpdateWithoutMemberDataInput {
+  schedule?: ActivityScheduleUpdateOneRequiredWithoutAttendancesInput;
   presence?: Boolean;
-  presence_not?: Boolean;
-  AND?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
-  OR?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
-  NOT?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
 }
 
-export interface ActivityListCreateOneWithoutSchedulesInput {
-  create?: ActivityListCreateWithoutSchedulesInput;
-  connect?: ActivityListWhereUniqueInput;
+export interface DistrictCreateWithoutCommunesInput {
+  name: String;
+  province: ProvinceCreateOneWithoutDistrictsInput;
 }
 
-export interface ActivityScheduleUpdateWithoutActivityDataInput {
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  attendances?: ActivityAttendanceUpdateManyWithoutScheduleInput;
+export interface ActivityAttendanceUpsertWithWhereUniqueWithoutMemberInput {
+  where: ActivityAttendanceWhereUniqueInput;
+  update: ActivityAttendanceUpdateWithoutMemberDataInput;
+  create: ActivityAttendanceCreateWithoutMemberInput;
 }
 
-export interface ProfileCreateOneWithoutAttendancesInput {
-  create?: ProfileCreateWithoutAttendancesInput;
-  connect?: ProfileWhereUniqueInput;
-}
-
-export interface GroupWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  members_every?: ProfileWhereInput;
-  members_some?: ProfileWhereInput;
-  members_none?: ProfileWhereInput;
-  leader?: ProfileWhereInput;
-  AND?: GroupWhereInput[] | GroupWhereInput;
-  OR?: GroupWhereInput[] | GroupWhereInput;
-  NOT?: GroupWhereInput[] | GroupWhereInput;
-}
-
-export interface GroupCreateOneWithoutMembersInput {
-  create?: GroupCreateWithoutMembersInput;
-  connect?: GroupWhereUniqueInput;
+export interface DistrictCreateInput {
+  name: String;
+  communes?: CommuneCreateManyWithoutDistrictInput;
+  province: ProvinceCreateOneWithoutDistrictsInput;
 }
 
 export interface ActivityAttendanceScalarWhereInput {
@@ -934,9 +1881,9 @@ export interface ActivityAttendanceScalarWhereInput {
     | ActivityAttendanceScalarWhereInput;
 }
 
-export interface ProfileCreateOneWithoutLeaderInput {
-  create?: ProfileCreateWithoutLeaderInput;
-  connect?: ProfileWhereUniqueInput;
+export interface ProvinceCreateInput {
+  name: String;
+  districts?: DistrictCreateManyWithoutProvinceInput;
 }
 
 export interface ActivityAttendanceUpdateManyWithWhereNestedInput {
@@ -944,30 +1891,7 @@ export interface ActivityAttendanceUpdateManyWithWhereNestedInput {
   data: ActivityAttendanceUpdateManyDataInput;
 }
 
-export interface ActivityAttendanceCreateManyWithoutMemberInput {
-  create?:
-    | ActivityAttendanceCreateWithoutMemberInput[]
-    | ActivityAttendanceCreateWithoutMemberInput;
-  connect?:
-    | ActivityAttendanceWhereUniqueInput[]
-    | ActivityAttendanceWhereUniqueInput;
-}
-
-export interface ActivityAttendanceUpdateManyDataInput {
-  presence?: Boolean;
-}
-
-export interface GroupCreateOneWithoutLeaderInput {
-  create?: GroupCreateWithoutLeaderInput;
-  connect?: GroupWhereUniqueInput;
-}
-
-export interface ProfileUpsertWithoutLeaderInput {
-  update: ProfileUpdateWithoutLeaderDataInput;
-  create: ProfileCreateWithoutLeaderInput;
-}
-
-export interface ActivityScheduleWhereInput {
+export interface ProvinceWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -982,29 +1906,64 @@ export interface ActivityScheduleWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  start?: DateTimeInput;
-  start_not?: DateTimeInput;
-  start_in?: DateTimeInput[] | DateTimeInput;
-  start_not_in?: DateTimeInput[] | DateTimeInput;
-  start_lt?: DateTimeInput;
-  start_lte?: DateTimeInput;
-  start_gt?: DateTimeInput;
-  start_gte?: DateTimeInput;
-  end?: DateTimeInput;
-  end_not?: DateTimeInput;
-  end_in?: DateTimeInput[] | DateTimeInput;
-  end_not_in?: DateTimeInput[] | DateTimeInput;
-  end_lt?: DateTimeInput;
-  end_lte?: DateTimeInput;
-  end_gt?: DateTimeInput;
-  end_gte?: DateTimeInput;
-  activity?: ActivityListWhereInput;
-  attendances_every?: ActivityAttendanceWhereInput;
-  attendances_some?: ActivityAttendanceWhereInput;
-  attendances_none?: ActivityAttendanceWhereInput;
-  AND?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
-  OR?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
-  NOT?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  districts_every?: DistrictWhereInput;
+  districts_some?: DistrictWhereInput;
+  districts_none?: DistrictWhereInput;
+  AND?: ProvinceWhereInput[] | ProvinceWhereInput;
+  OR?: ProvinceWhereInput[] | ProvinceWhereInput;
+  NOT?: ProvinceWhereInput[] | ProvinceWhereInput;
+}
+
+export interface ActivityAttendanceUpdateManyDataInput {
+  presence?: Boolean;
+}
+
+export interface ActivityAttendanceWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  schedule?: ActivityScheduleWhereInput;
+  member?: ProfileWhereInput;
+  presence?: Boolean;
+  presence_not?: Boolean;
+  AND?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
+  OR?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
+  NOT?: ActivityAttendanceWhereInput[] | ActivityAttendanceWhereInput;
+}
+
+export interface ProfileUpsertWithoutLeaderInput {
+  update: ProfileUpdateWithoutLeaderDataInput;
+  create: ProfileCreateWithoutLeaderInput;
+}
+
+export interface ProvinceUpdateInput {
+  name?: String;
+  districts?: DistrictUpdateManyWithoutProvinceInput;
 }
 
 export interface GroupUpsertWithoutMembersInput {
@@ -1012,21 +1971,10 @@ export interface GroupUpsertWithoutMembersInput {
   create: GroupCreateWithoutMembersInput;
 }
 
-export interface ActivityListSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ActivityListWhereInput;
-  AND?:
-    | ActivityListSubscriptionWhereInput[]
-    | ActivityListSubscriptionWhereInput;
-  OR?:
-    | ActivityListSubscriptionWhereInput[]
-    | ActivityListSubscriptionWhereInput;
-  NOT?:
-    | ActivityListSubscriptionWhereInput[]
-    | ActivityListSubscriptionWhereInput;
+export interface GroupCreateInput {
+  name: String;
+  members?: ProfileCreateManyWithoutGroupInput;
+  leader?: ProfileCreateOneWithoutLeaderInput;
 }
 
 export interface GroupUpdateOneWithoutLeaderInput {
@@ -1038,18 +1986,12 @@ export interface GroupUpdateOneWithoutLeaderInput {
   connect?: GroupWhereUniqueInput;
 }
 
-export interface ProfileCreateInput {
-  oldId: ID_Input;
-  firstName: String;
-  lastName: String;
-  gender: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-  group?: GroupCreateOneWithoutMembersInput;
-  leader?: GroupCreateOneWithoutLeaderInput;
-  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
+export interface AddressUpdateInput {
+  no?: String;
+  street?: String;
+  commune?: CommuneUpdateOneInput;
+  district?: DistrictUpdateOneInput;
+  province?: ProvinceUpdateOneInput;
 }
 
 export interface GroupUpdateWithoutLeaderDataInput {
@@ -1057,10 +1999,9 @@ export interface GroupUpdateWithoutLeaderDataInput {
   members?: ProfileUpdateManyWithoutGroupInput;
 }
 
-export interface GroupCreateInput {
-  name: String;
-  members?: ProfileCreateManyWithoutGroupInput;
-  leader?: ProfileCreateOneWithoutLeaderInput;
+export interface ActivityScheduleUpdateManyWithWhereNestedInput {
+  where: ActivityScheduleScalarWhereInput;
+  data: ActivityScheduleUpdateManyDataInput;
 }
 
 export interface ProfileUpdateManyWithoutGroupInput {
@@ -1080,21 +2021,19 @@ export interface ProfileUpdateManyWithoutGroupInput {
     | ProfileUpdateManyWithWhereNestedInput;
 }
 
-export interface ActivityScheduleCreateInput {
-  start: DateTimeInput;
-  end: DateTimeInput;
-  activity: ActivityListCreateOneWithoutSchedulesInput;
-  attendances?: ActivityAttendanceCreateManyWithoutScheduleInput;
-}
+export type ProvinceWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export interface ProfileUpdateWithWhereUniqueWithoutGroupInput {
   where: ProfileWhereUniqueInput;
   data: ProfileUpdateWithoutGroupDataInput;
 }
 
-export interface ActivityScheduleUpdateManyWithWhereNestedInput {
-  where: ActivityScheduleScalarWhereInput;
-  data: ActivityScheduleUpdateManyDataInput;
+export interface ActivityScheduleCreateWithoutAttendancesInput {
+  start: DateTimeInput;
+  end: DateTimeInput;
+  activity: ActivityListCreateOneWithoutSchedulesInput;
 }
 
 export interface ProfileUpdateWithoutGroupDataInput {
@@ -1102,18 +2041,23 @@ export interface ProfileUpdateWithoutGroupDataInput {
   firstName?: String;
   lastName?: String;
   gender?: Boolean;
+  email?: String;
+  facebookId?: String;
   phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
   dayOfBirth?: Int;
   monthOfBirth?: Int;
   yearOfBirth?: Int;
+  address?: AddressUpdateOneInput;
+  hometown?: ProvinceUpdateOneInput;
   leader?: GroupUpdateOneWithoutLeaderInput;
   attendances?: ActivityAttendanceUpdateManyWithoutMemberInput;
 }
 
-export interface ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput {
-  where: ActivityAttendanceWhereUniqueInput;
-  update: ActivityAttendanceUpdateWithoutScheduleDataInput;
-  create: ActivityAttendanceCreateWithoutScheduleInput;
+export interface CommuneCreateInput {
+  name: String;
+  district: DistrictCreateOneWithoutCommunesInput;
 }
 
 export interface ProfileUpsertWithWhereUniqueWithoutGroupInput {
@@ -1122,10 +2066,8 @@ export interface ProfileUpsertWithWhereUniqueWithoutGroupInput {
   create: ProfileCreateWithoutGroupInput;
 }
 
-export interface ActivityAttendanceCreateInput {
-  schedule: ActivityScheduleCreateOneWithoutAttendancesInput;
-  member: ProfileCreateOneWithoutAttendancesInput;
-  presence: Boolean;
+export interface CommuneCreateWithoutDistrictInput {
+  name: String;
 }
 
 export interface ProfileScalarWhereInput {
@@ -1187,6 +2129,34 @@ export interface ProfileScalarWhereInput {
   lastName_not_ends_with?: String;
   gender?: Boolean;
   gender_not?: Boolean;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  facebookId?: String;
+  facebookId_not?: String;
+  facebookId_in?: String[] | String;
+  facebookId_not_in?: String[] | String;
+  facebookId_lt?: String;
+  facebookId_lte?: String;
+  facebookId_gt?: String;
+  facebookId_gte?: String;
+  facebookId_contains?: String;
+  facebookId_not_contains?: String;
+  facebookId_starts_with?: String;
+  facebookId_not_starts_with?: String;
+  facebookId_ends_with?: String;
+  facebookId_not_ends_with?: String;
   phoneNumber?: String;
   phoneNumber_not?: String;
   phoneNumber_in?: String[] | String;
@@ -1201,6 +2171,22 @@ export interface ProfileScalarWhereInput {
   phoneNumber_not_starts_with?: String;
   phoneNumber_ends_with?: String;
   phoneNumber_not_ends_with?: String;
+  birthday?: DateTimeInput;
+  birthday_not?: DateTimeInput;
+  birthday_in?: DateTimeInput[] | DateTimeInput;
+  birthday_not_in?: DateTimeInput[] | DateTimeInput;
+  birthday_lt?: DateTimeInput;
+  birthday_lte?: DateTimeInput;
+  birthday_gt?: DateTimeInput;
+  birthday_gte?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  joinDate_not?: DateTimeInput;
+  joinDate_in?: DateTimeInput[] | DateTimeInput;
+  joinDate_not_in?: DateTimeInput[] | DateTimeInput;
+  joinDate_lt?: DateTimeInput;
+  joinDate_lte?: DateTimeInput;
+  joinDate_gt?: DateTimeInput;
+  joinDate_gte?: DateTimeInput;
   dayOfBirth?: Int;
   dayOfBirth_not?: Int;
   dayOfBirth_in?: Int[] | Int;
@@ -1230,8 +2216,15 @@ export interface ProfileScalarWhereInput {
   NOT?: ProfileScalarWhereInput[] | ProfileScalarWhereInput;
 }
 
-export interface ActivityListCreateWithoutSchedulesInput {
-  name: String;
+export interface ProfileSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ProfileWhereInput;
+  AND?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
+  OR?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
+  NOT?: ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput;
 }
 
 export interface ProfileUpdateManyWithWhereNestedInput {
@@ -1239,9 +2232,24 @@ export interface ProfileUpdateManyWithWhereNestedInput {
   data: ProfileUpdateManyDataInput;
 }
 
-export interface GroupCreateWithoutMembersInput {
-  name: String;
-  leader?: ProfileCreateOneWithoutLeaderInput;
+export interface ProfileCreateInput {
+  oldId: ID_Input;
+  firstName: String;
+  lastName: String;
+  gender: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+  address?: AddressCreateOneInput;
+  hometown?: ProvinceCreateOneInput;
+  group?: GroupCreateOneWithoutMembersInput;
+  leader?: GroupCreateOneWithoutLeaderInput;
+  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
 }
 
 export interface ProfileUpdateManyDataInput {
@@ -1249,15 +2257,21 @@ export interface ProfileUpdateManyDataInput {
   firstName?: String;
   lastName?: String;
   gender?: Boolean;
+  email?: String;
+  facebookId?: String;
   phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
   dayOfBirth?: Int;
   monthOfBirth?: Int;
   yearOfBirth?: Int;
 }
 
-export interface ActivityAttendanceCreateWithoutMemberInput {
-  schedule: ActivityScheduleCreateOneWithoutAttendancesInput;
-  presence: Boolean;
+export interface ActivityScheduleCreateInput {
+  start: DateTimeInput;
+  end: DateTimeInput;
+  activity: ActivityListCreateOneWithoutSchedulesInput;
+  attendances?: ActivityAttendanceCreateManyWithoutScheduleInput;
 }
 
 export interface GroupUpsertWithoutLeaderInput {
@@ -1265,15 +2279,9 @@ export interface GroupUpsertWithoutLeaderInput {
   create: GroupCreateWithoutLeaderInput;
 }
 
-export interface GroupSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: GroupWhereInput;
-  AND?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
-  OR?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
-  NOT?: GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput;
+export interface ActivityListUpdateInput {
+  name?: String;
+  schedules?: ActivityScheduleUpdateManyWithoutActivityInput;
 }
 
 export interface ProfileUpsertWithoutAttendancesInput {
@@ -1281,66 +2289,8 @@ export interface ProfileUpsertWithoutAttendancesInput {
   create: ProfileCreateWithoutAttendancesInput;
 }
 
-export interface GroupUpdateManyMutationInput {
-  name?: String;
-}
-
-export interface ActivityAttendanceUpdateManyMutationInput {
-  presence?: Boolean;
-}
-
-export type GroupWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput {
-  where: ActivityScheduleWhereUniqueInput;
-  data: ActivityScheduleUpdateWithoutActivityDataInput;
-}
-
-export interface ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput {
-  where: ActivityAttendanceWhereUniqueInput;
-  data: ActivityAttendanceUpdateWithoutScheduleDataInput;
-}
-
-export interface ActivityScheduleUpdateManyWithoutActivityInput {
-  create?:
-    | ActivityScheduleCreateWithoutActivityInput[]
-    | ActivityScheduleCreateWithoutActivityInput;
-  delete?:
-    | ActivityScheduleWhereUniqueInput[]
-    | ActivityScheduleWhereUniqueInput;
-  connect?:
-    | ActivityScheduleWhereUniqueInput[]
-    | ActivityScheduleWhereUniqueInput;
-  disconnect?:
-    | ActivityScheduleWhereUniqueInput[]
-    | ActivityScheduleWhereUniqueInput;
-  update?:
-    | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput[]
-    | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput;
-  upsert?:
-    | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput[]
-    | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput;
-  deleteMany?:
-    | ActivityScheduleScalarWhereInput[]
-    | ActivityScheduleScalarWhereInput;
-  updateMany?:
-    | ActivityScheduleUpdateManyWithWhereNestedInput[]
-    | ActivityScheduleUpdateManyWithWhereNestedInput;
-}
-
-export interface ProfileCreateWithoutAttendancesInput {
-  oldId: ID_Input;
-  firstName: String;
-  lastName: String;
-  gender: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-  group?: GroupCreateOneWithoutMembersInput;
-  leader?: GroupCreateOneWithoutLeaderInput;
+export interface ProvinceCreateWithoutDistrictsInput {
+  name: String;
 }
 
 export interface ActivityListCreateInput {
@@ -1348,14 +2298,10 @@ export interface ActivityListCreateInput {
   schedules?: ActivityScheduleCreateManyWithoutActivityInput;
 }
 
-export interface GroupCreateWithoutLeaderInput {
-  name: String;
-  members?: ProfileCreateManyWithoutGroupInput;
-}
-
-export interface ActivityAttendanceCreateWithoutScheduleInput {
-  member: ProfileCreateOneWithoutAttendancesInput;
-  presence: Boolean;
+export interface ActivityScheduleCreateWithoutActivityInput {
+  start: DateTimeInput;
+  end: DateTimeInput;
+  attendances?: ActivityAttendanceCreateManyWithoutScheduleInput;
 }
 
 export interface ActivityAttendanceCreateManyWithoutScheduleInput {
@@ -1367,103 +2313,104 @@ export interface ActivityAttendanceCreateManyWithoutScheduleInput {
     | ActivityAttendanceWhereUniqueInput;
 }
 
-export interface ActivityScheduleCreateWithoutActivityInput {
-  start: DateTimeInput;
-  end: DateTimeInput;
-  attendances?: ActivityAttendanceCreateManyWithoutScheduleInput;
+export interface ActivityAttendanceUpdateManyMutationInput {
+  presence?: Boolean;
 }
 
-export interface ActivityScheduleCreateManyWithoutActivityInput {
-  create?:
-    | ActivityScheduleCreateWithoutActivityInput[]
-    | ActivityScheduleCreateWithoutActivityInput;
-  connect?:
-    | ActivityScheduleWhereUniqueInput[]
-    | ActivityScheduleWhereUniqueInput;
+export interface DistrictCreateWithoutProvinceInput {
+  name: String;
+  communes?: CommuneCreateManyWithoutDistrictInput;
 }
 
-export interface ProfileUpdateManyMutationInput {
-  oldId?: ID_Input;
-  firstName?: String;
-  lastName?: String;
-  gender?: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-}
-
-export interface ProfileCreateWithoutLeaderInput {
+export interface ProfileCreateWithoutAttendancesInput {
   oldId: ID_Input;
   firstName: String;
   lastName: String;
   gender: Boolean;
+  email?: String;
+  facebookId?: String;
   phoneNumber?: String;
+  birthday?: DateTimeInput;
+  joinDate?: DateTimeInput;
   dayOfBirth?: Int;
   monthOfBirth?: Int;
   yearOfBirth?: Int;
+  address?: AddressCreateOneInput;
+  hometown?: ProvinceCreateOneInput;
   group?: GroupCreateOneWithoutMembersInput;
-  attendances?: ActivityAttendanceCreateManyWithoutMemberInput;
+  leader?: GroupCreateOneWithoutLeaderInput;
 }
 
-export interface ActivityScheduleCreateWithoutAttendancesInput {
-  start: DateTimeInput;
-  end: DateTimeInput;
-  activity: ActivityListCreateOneWithoutSchedulesInput;
-}
-
-export interface ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput {
-  where: ActivityScheduleWhereUniqueInput;
-  update: ActivityScheduleUpdateWithoutActivityDataInput;
-  create: ActivityScheduleCreateWithoutActivityInput;
-}
-
-export type ActivityScheduleWhereUniqueInput = AtLeastOne<{
+export type ProfileWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  oldId?: ID_Input;
 }>;
+
+export interface CommuneUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface ActivityScheduleWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  start?: DateTimeInput;
+  start_not?: DateTimeInput;
+  start_in?: DateTimeInput[] | DateTimeInput;
+  start_not_in?: DateTimeInput[] | DateTimeInput;
+  start_lt?: DateTimeInput;
+  start_lte?: DateTimeInput;
+  start_gt?: DateTimeInput;
+  start_gte?: DateTimeInput;
+  end?: DateTimeInput;
+  end_not?: DateTimeInput;
+  end_in?: DateTimeInput[] | DateTimeInput;
+  end_not_in?: DateTimeInput[] | DateTimeInput;
+  end_lt?: DateTimeInput;
+  end_lte?: DateTimeInput;
+  end_gt?: DateTimeInput;
+  end_gte?: DateTimeInput;
+  activity?: ActivityListWhereInput;
+  attendances_every?: ActivityAttendanceWhereInput;
+  attendances_some?: ActivityAttendanceWhereInput;
+  attendances_none?: ActivityAttendanceWhereInput;
+  AND?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
+  OR?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
+  NOT?: ActivityScheduleWhereInput[] | ActivityScheduleWhereInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface ProfilePreviousValues {
+export interface ProvincePreviousValues {
   id: ID_Output;
-  oldId: ID_Output;
-  firstName: String;
-  lastName: String;
-  gender: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
+  name: String;
 }
 
-export interface ProfilePreviousValuesPromise
-  extends Promise<ProfilePreviousValues>,
+export interface ProvincePreviousValuesPromise
+  extends Promise<ProvincePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  oldId: () => Promise<ID_Output>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  gender: () => Promise<Boolean>;
-  phoneNumber: () => Promise<String>;
-  dayOfBirth: () => Promise<Int>;
-  monthOfBirth: () => Promise<Int>;
-  yearOfBirth: () => Promise<Int>;
+  name: () => Promise<String>;
 }
 
-export interface ProfilePreviousValuesSubscription
-  extends Promise<AsyncIterator<ProfilePreviousValues>>,
+export interface ProvincePreviousValuesSubscription
+  extends Promise<AsyncIterator<ProvincePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  oldId: () => Promise<AsyncIterator<ID_Output>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  gender: () => Promise<AsyncIterator<Boolean>>;
-  phoneNumber: () => Promise<AsyncIterator<String>>;
-  dayOfBirth: () => Promise<AsyncIterator<Int>>;
-  monthOfBirth: () => Promise<AsyncIterator<Int>>;
-  yearOfBirth: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ActivityListConnection {
@@ -1487,107 +2434,29 @@ export interface ActivityListConnectionSubscription
   aggregate: <T = AggregateActivityListSubscription>() => T;
 }
 
-export interface Profile {
-  id: ID_Output;
-  oldId: ID_Output;
-  firstName: String;
-  lastName: String;
-  gender: Boolean;
-  phoneNumber?: String;
-  dayOfBirth?: Int;
-  monthOfBirth?: Int;
-  yearOfBirth?: Int;
-}
-
-export interface ProfilePromise extends Promise<Profile>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  oldId: () => Promise<ID_Output>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  gender: () => Promise<Boolean>;
-  phoneNumber: () => Promise<String>;
-  dayOfBirth: () => Promise<Int>;
-  monthOfBirth: () => Promise<Int>;
-  yearOfBirth: () => Promise<Int>;
-  group: <T = GroupPromise>() => T;
-  leader: <T = GroupPromise>() => T;
-  attendances: <T = FragmentableArray<ActivityAttendance>>(args?: {
-    where?: ActivityAttendanceWhereInput;
-    orderBy?: ActivityAttendanceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface ProfileSubscription
-  extends Promise<AsyncIterator<Profile>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  oldId: () => Promise<AsyncIterator<ID_Output>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  gender: () => Promise<AsyncIterator<Boolean>>;
-  phoneNumber: () => Promise<AsyncIterator<String>>;
-  dayOfBirth: () => Promise<AsyncIterator<Int>>;
-  monthOfBirth: () => Promise<AsyncIterator<Int>>;
-  yearOfBirth: () => Promise<AsyncIterator<Int>>;
-  group: <T = GroupSubscription>() => T;
-  leader: <T = GroupSubscription>() => T;
-  attendances: <
-    T = Promise<AsyncIterator<ActivityAttendanceSubscription>>
-  >(args?: {
-    where?: ActivityAttendanceWhereInput;
-    orderBy?: ActivityAttendanceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface GroupSubscriptionPayload {
+export interface ProfileSubscriptionPayload {
   mutation: MutationType;
-  node: Group;
+  node: Profile;
   updatedFields: String[];
-  previousValues: GroupPreviousValues;
+  previousValues: ProfilePreviousValues;
 }
 
-export interface GroupSubscriptionPayloadPromise
-  extends Promise<GroupSubscriptionPayload>,
+export interface ProfileSubscriptionPayloadPromise
+  extends Promise<ProfileSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = GroupPromise>() => T;
+  node: <T = ProfilePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = GroupPreviousValuesPromise>() => T;
+  previousValues: <T = ProfilePreviousValuesPromise>() => T;
 }
 
-export interface GroupSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<GroupSubscriptionPayload>>,
+export interface ProfileSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProfileSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = GroupSubscription>() => T;
+  node: <T = ProfileSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = GroupPreviousValuesSubscription>() => T;
-}
-
-export interface AggregateActivityAttendance {
-  count: Int;
-}
-
-export interface AggregateActivityAttendancePromise
-  extends Promise<AggregateActivityAttendance>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateActivityAttendanceSubscription
-  extends Promise<AsyncIterator<AggregateActivityAttendance>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  previousValues: <T = ProfilePreviousValuesSubscription>() => T;
 }
 
 export interface BatchPayload {
@@ -1606,23 +2475,57 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface GroupPreviousValues {
-  id: ID_Output;
-  name: String;
+export interface AggregateProvince {
+  count: Int;
 }
 
-export interface GroupPreviousValuesPromise
-  extends Promise<GroupPreviousValues>,
+export interface AggregateProvincePromise
+  extends Promise<AggregateProvince>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  count: () => Promise<Int>;
 }
 
-export interface GroupPreviousValuesSubscription
-  extends Promise<AsyncIterator<GroupPreviousValues>>,
+export interface AggregateProvinceSubscription
+  extends Promise<AsyncIterator<AggregateProvince>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateActivityAttendance {
+  count: Int;
+}
+
+export interface AggregateActivityAttendancePromise
+  extends Promise<AggregateActivityAttendance>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateActivityAttendanceSubscription
+  extends Promise<AsyncIterator<AggregateActivityAttendance>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ProvinceConnection {
+  pageInfo: PageInfo;
+  edges: ProvinceEdge[];
+}
+
+export interface ProvinceConnectionPromise
+  extends Promise<ProvinceConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProvinceEdge>>() => T;
+  aggregate: <T = AggregateProvincePromise>() => T;
+}
+
+export interface ProvinceConnectionSubscription
+  extends Promise<AsyncIterator<ProvinceConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProvinceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProvinceSubscription>() => T;
 }
 
 export interface ActivityAttendanceEdge {
@@ -1644,21 +2547,20 @@ export interface ActivityAttendanceEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ProfileEdge {
-  node: Profile;
-  cursor: String;
+export interface AggregateProfile {
+  count: Int;
 }
 
-export interface ProfileEdgePromise extends Promise<ProfileEdge>, Fragmentable {
-  node: <T = ProfilePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProfileEdgeSubscription
-  extends Promise<AsyncIterator<ProfileEdge>>,
+export interface AggregateProfilePromise
+  extends Promise<AggregateProfile>,
     Fragmentable {
-  node: <T = ProfileSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateProfileSubscription
+  extends Promise<AsyncIterator<AggregateProfile>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PageInfo {
@@ -1684,64 +2586,25 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateGroup {
-  count: Int;
-}
-
-export interface AggregateGroupPromise
-  extends Promise<AggregateGroup>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateGroupSubscription
-  extends Promise<AsyncIterator<AggregateGroup>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ActivityAttendanceConnection {
+export interface ProfileConnection {
   pageInfo: PageInfo;
-  edges: ActivityAttendanceEdge[];
+  edges: ProfileEdge[];
 }
 
-export interface ActivityAttendanceConnectionPromise
-  extends Promise<ActivityAttendanceConnection>,
+export interface ProfileConnectionPromise
+  extends Promise<ProfileConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ActivityAttendanceEdge>>() => T;
-  aggregate: <T = AggregateActivityAttendancePromise>() => T;
+  edges: <T = FragmentableArray<ProfileEdge>>() => T;
+  aggregate: <T = AggregateProfilePromise>() => T;
 }
 
-export interface ActivityAttendanceConnectionSubscription
-  extends Promise<AsyncIterator<ActivityAttendanceConnection>>,
+export interface ProfileConnectionSubscription
+  extends Promise<AsyncIterator<ProfileConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <
-    T = Promise<AsyncIterator<ActivityAttendanceEdgeSubscription>>
-  >() => T;
-  aggregate: <T = AggregateActivityAttendanceSubscription>() => T;
-}
-
-export interface GroupConnection {
-  pageInfo: PageInfo;
-  edges: GroupEdge[];
-}
-
-export interface GroupConnectionPromise
-  extends Promise<GroupConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<GroupEdge>>() => T;
-  aggregate: <T = AggregateGroupPromise>() => T;
-}
-
-export interface GroupConnectionSubscription
-  extends Promise<AsyncIterator<GroupConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<GroupEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateGroupSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProfileEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProfileSubscription>() => T;
 }
 
 export interface ActivityAttendance {
@@ -1767,20 +2630,21 @@ export interface ActivityAttendanceSubscription
   presence: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface AggregateActivitySchedule {
-  count: Int;
+export interface GroupEdge {
+  node: Group;
+  cursor: String;
 }
 
-export interface AggregateActivitySchedulePromise
-  extends Promise<AggregateActivitySchedule>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface GroupEdgePromise extends Promise<GroupEdge>, Fragmentable {
+  node: <T = GroupPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateActivityScheduleSubscription
-  extends Promise<AsyncIterator<AggregateActivitySchedule>>,
+export interface GroupEdgeSubscription
+  extends Promise<AsyncIterator<GroupEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = GroupSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ActivityAttendanceSubscriptionPayload {
@@ -1808,25 +2672,56 @@ export interface ActivityAttendanceSubscriptionPayloadSubscription
   previousValues: <T = ActivityAttendancePreviousValuesSubscription>() => T;
 }
 
-export interface ActivityScheduleConnection {
-  pageInfo: PageInfo;
-  edges: ActivityScheduleEdge[];
+export interface ProfilePreviousValues {
+  id: ID_Output;
+  oldId: ID_Output;
+  firstName: String;
+  lastName: String;
+  gender: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeOutput;
+  joinDate?: DateTimeOutput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
 }
 
-export interface ActivityScheduleConnectionPromise
-  extends Promise<ActivityScheduleConnection>,
+export interface ProfilePreviousValuesPromise
+  extends Promise<ProfilePreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ActivityScheduleEdge>>() => T;
-  aggregate: <T = AggregateActivitySchedulePromise>() => T;
+  id: () => Promise<ID_Output>;
+  oldId: () => Promise<ID_Output>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  gender: () => Promise<Boolean>;
+  email: () => Promise<String>;
+  facebookId: () => Promise<String>;
+  phoneNumber: () => Promise<String>;
+  birthday: () => Promise<DateTimeOutput>;
+  joinDate: () => Promise<DateTimeOutput>;
+  dayOfBirth: () => Promise<Int>;
+  monthOfBirth: () => Promise<Int>;
+  yearOfBirth: () => Promise<Int>;
 }
 
-export interface ActivityScheduleConnectionSubscription
-  extends Promise<AsyncIterator<ActivityScheduleConnection>>,
+export interface ProfilePreviousValuesSubscription
+  extends Promise<AsyncIterator<ProfilePreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ActivityScheduleEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateActivityScheduleSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  oldId: () => Promise<AsyncIterator<ID_Output>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Boolean>>;
+  email: () => Promise<AsyncIterator<String>>;
+  facebookId: () => Promise<AsyncIterator<String>>;
+  phoneNumber: () => Promise<AsyncIterator<String>>;
+  birthday: () => Promise<AsyncIterator<DateTimeOutput>>;
+  joinDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dayOfBirth: () => Promise<AsyncIterator<Int>>;
+  monthOfBirth: () => Promise<AsyncIterator<Int>>;
+  yearOfBirth: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ActivityAttendancePreviousValues {
@@ -1848,23 +2743,181 @@ export interface ActivityAttendancePreviousValuesSubscription
   presence: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface ActivityListEdge {
-  node: ActivityList;
+export interface DistrictEdge {
+  node: District;
   cursor: String;
 }
 
-export interface ActivityListEdgePromise
-  extends Promise<ActivityListEdge>,
+export interface DistrictEdgePromise
+  extends Promise<DistrictEdge>,
     Fragmentable {
-  node: <T = ActivityListPromise>() => T;
+  node: <T = DistrictPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface ActivityListEdgeSubscription
-  extends Promise<AsyncIterator<ActivityListEdge>>,
+export interface DistrictEdgeSubscription
+  extends Promise<AsyncIterator<DistrictEdge>>,
     Fragmentable {
-  node: <T = ActivityListSubscription>() => T;
+  node: <T = DistrictSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActivityAttendanceConnection {
+  pageInfo: PageInfo;
+  edges: ActivityAttendanceEdge[];
+}
+
+export interface ActivityAttendanceConnectionPromise
+  extends Promise<ActivityAttendanceConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ActivityAttendanceEdge>>() => T;
+  aggregate: <T = AggregateActivityAttendancePromise>() => T;
+}
+
+export interface ActivityAttendanceConnectionSubscription
+  extends Promise<AsyncIterator<ActivityAttendanceConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <
+    T = Promise<AsyncIterator<ActivityAttendanceEdgeSubscription>>
+  >() => T;
+  aggregate: <T = AggregateActivityAttendanceSubscription>() => T;
+}
+
+export interface AggregateCommune {
+  count: Int;
+}
+
+export interface AggregateCommunePromise
+  extends Promise<AggregateCommune>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCommuneSubscription
+  extends Promise<AsyncIterator<AggregateCommune>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ActivityListSubscriptionPayload {
+  mutation: MutationType;
+  node: ActivityList;
+  updatedFields: String[];
+  previousValues: ActivityListPreviousValues;
+}
+
+export interface ActivityListSubscriptionPayloadPromise
+  extends Promise<ActivityListSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ActivityListPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ActivityListPreviousValuesPromise>() => T;
+}
+
+export interface ActivityListSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ActivityListSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ActivityListSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ActivityListPreviousValuesSubscription>() => T;
+}
+
+export interface CommuneConnection {
+  pageInfo: PageInfo;
+  edges: CommuneEdge[];
+}
+
+export interface CommuneConnectionPromise
+  extends Promise<CommuneConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CommuneEdge>>() => T;
+  aggregate: <T = AggregateCommunePromise>() => T;
+}
+
+export interface CommuneConnectionSubscription
+  extends Promise<AsyncIterator<CommuneConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CommuneEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCommuneSubscription>() => T;
+}
+
+export interface ActivityListPreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface ActivityListPreviousValuesPromise
+  extends Promise<ActivityListPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface ActivityListPreviousValuesSubscription
+  extends Promise<AsyncIterator<ActivityListPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AddressEdge {
+  node: Address;
+  cursor: String;
+}
+
+export interface AddressEdgePromise extends Promise<AddressEdge>, Fragmentable {
+  node: <T = AddressPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AddressEdgeSubscription
+  extends Promise<AsyncIterator<AddressEdge>>,
+    Fragmentable {
+  node: <T = AddressSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Group {
+  id: ID_Output;
+  name: String;
+}
+
+export interface GroupPromise extends Promise<Group>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  members: <T = FragmentableArray<Profile>>(args?: {
+    where?: ProfileWhereInput;
+    orderBy?: ProfileOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  leader: <T = ProfilePromise>() => T;
+}
+
+export interface GroupSubscription
+  extends Promise<AsyncIterator<Group>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  members: <T = Promise<AsyncIterator<ProfileSubscription>>>(args?: {
+    where?: ProfileWhereInput;
+    orderBy?: ProfileOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  leader: <T = ProfileSubscription>() => T;
 }
 
 export interface ActivityList {
@@ -1904,62 +2957,29 @@ export interface ActivityListSubscription
   }) => T;
 }
 
-export interface AggregateProfile {
-  count: Int;
-}
-
-export interface AggregateProfilePromise
-  extends Promise<AggregateProfile>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateProfileSubscription
-  extends Promise<AsyncIterator<AggregateProfile>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ActivityListSubscriptionPayload {
+export interface ActivityScheduleSubscriptionPayload {
   mutation: MutationType;
-  node: ActivityList;
+  node: ActivitySchedule;
   updatedFields: String[];
-  previousValues: ActivityListPreviousValues;
+  previousValues: ActivitySchedulePreviousValues;
 }
 
-export interface ActivityListSubscriptionPayloadPromise
-  extends Promise<ActivityListSubscriptionPayload>,
+export interface ActivityScheduleSubscriptionPayloadPromise
+  extends Promise<ActivityScheduleSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = ActivityListPromise>() => T;
+  node: <T = ActivitySchedulePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = ActivityListPreviousValuesPromise>() => T;
+  previousValues: <T = ActivitySchedulePreviousValuesPromise>() => T;
 }
 
-export interface ActivityListSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ActivityListSubscriptionPayload>>,
+export interface ActivityScheduleSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ActivityScheduleSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ActivityListSubscription>() => T;
+  node: <T = ActivityScheduleSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ActivityListPreviousValuesSubscription>() => T;
-}
-
-export interface GroupEdge {
-  node: Group;
-  cursor: String;
-}
-
-export interface GroupEdgePromise extends Promise<GroupEdge>, Fragmentable {
-  node: <T = GroupPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface GroupEdgeSubscription
-  extends Promise<AsyncIterator<GroupEdge>>,
-    Fragmentable {
-  node: <T = GroupSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  previousValues: <T = ActivitySchedulePreviousValuesSubscription>() => T;
 }
 
 export interface ActivityScheduleEdge {
@@ -2003,87 +3023,6 @@ export interface ActivitySchedulePreviousValuesSubscription
   end: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ActivityScheduleSubscriptionPayload {
-  mutation: MutationType;
-  node: ActivitySchedule;
-  updatedFields: String[];
-  previousValues: ActivitySchedulePreviousValues;
-}
-
-export interface ActivityScheduleSubscriptionPayloadPromise
-  extends Promise<ActivityScheduleSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ActivitySchedulePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ActivitySchedulePreviousValuesPromise>() => T;
-}
-
-export interface ActivityScheduleSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ActivityScheduleSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ActivityScheduleSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ActivitySchedulePreviousValuesSubscription>() => T;
-}
-
-export interface Group {
-  id: ID_Output;
-  name: String;
-}
-
-export interface GroupPromise extends Promise<Group>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  members: <T = FragmentableArray<Profile>>(args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  leader: <T = ProfilePromise>() => T;
-}
-
-export interface GroupSubscription
-  extends Promise<AsyncIterator<Group>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  members: <T = Promise<AsyncIterator<ProfileSubscription>>>(args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  leader: <T = ProfileSubscription>() => T;
-}
-
-export interface ActivityListPreviousValues {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ActivityListPreviousValuesPromise
-  extends Promise<ActivityListPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ActivityListPreviousValuesSubscription
-  extends Promise<AsyncIterator<ActivityListPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
 export interface AggregateActivityList {
   count: Int;
 }
@@ -2098,6 +3037,91 @@ export interface AggregateActivityListSubscription
   extends Promise<AsyncIterator<AggregateActivityList>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Province {
+  id: ID_Output;
+  name: String;
+}
+
+export interface ProvincePromise extends Promise<Province>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  districts: <T = FragmentableArray<District>>(args?: {
+    where?: DistrictWhereInput;
+    orderBy?: DistrictOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ProvinceSubscription
+  extends Promise<AsyncIterator<Province>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  districts: <T = Promise<AsyncIterator<DistrictSubscription>>>(args?: {
+    where?: DistrictWhereInput;
+    orderBy?: DistrictOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ProvinceSubscriptionPayload {
+  mutation: MutationType;
+  node: Province;
+  updatedFields: String[];
+  previousValues: ProvincePreviousValues;
+}
+
+export interface ProvinceSubscriptionPayloadPromise
+  extends Promise<ProvinceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProvincePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProvincePreviousValuesPromise>() => T;
+}
+
+export interface ProvinceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProvinceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProvinceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProvincePreviousValuesSubscription>() => T;
+}
+
+export interface AddressSubscriptionPayload {
+  mutation: MutationType;
+  node: Address;
+  updatedFields: String[];
+  previousValues: AddressPreviousValues;
+}
+
+export interface AddressSubscriptionPayloadPromise
+  extends Promise<AddressSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AddressPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AddressPreviousValuesPromise>() => T;
+}
+
+export interface AddressSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AddressSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AddressSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AddressPreviousValuesSubscription>() => T;
 }
 
 export interface ActivitySchedule {
@@ -2144,51 +3168,544 @@ export interface ActivityScheduleSubscription
   }) => T;
 }
 
-export interface ProfileConnection {
-  pageInfo: PageInfo;
-  edges: ProfileEdge[];
+export interface AddressPreviousValues {
+  id: ID_Output;
+  no?: String;
+  street?: String;
 }
 
-export interface ProfileConnectionPromise
-  extends Promise<ProfileConnection>,
+export interface AddressPreviousValuesPromise
+  extends Promise<AddressPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ProfileEdge>>() => T;
-  aggregate: <T = AggregateProfilePromise>() => T;
+  id: () => Promise<ID_Output>;
+  no: () => Promise<String>;
+  street: () => Promise<String>;
 }
 
-export interface ProfileConnectionSubscription
-  extends Promise<AsyncIterator<ProfileConnection>>,
+export interface AddressPreviousValuesSubscription
+  extends Promise<AsyncIterator<AddressPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ProfileEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateProfileSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  no: () => Promise<AsyncIterator<String>>;
+  street: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ProfileSubscriptionPayload {
+export interface AggregateGroup {
+  count: Int;
+}
+
+export interface AggregateGroupPromise
+  extends Promise<AggregateGroup>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGroupSubscription
+  extends Promise<AsyncIterator<AggregateGroup>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface District {
+  id: ID_Output;
+  name: String;
+}
+
+export interface DistrictPromise extends Promise<District>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  communes: <T = FragmentableArray<Commune>>(args?: {
+    where?: CommuneWhereInput;
+    orderBy?: CommuneOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  province: <T = ProvincePromise>() => T;
+}
+
+export interface DistrictSubscription
+  extends Promise<AsyncIterator<District>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  communes: <T = Promise<AsyncIterator<CommuneSubscription>>>(args?: {
+    where?: CommuneWhereInput;
+    orderBy?: CommuneOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  province: <T = ProvinceSubscription>() => T;
+}
+
+export interface AggregateDistrict {
+  count: Int;
+}
+
+export interface AggregateDistrictPromise
+  extends Promise<AggregateDistrict>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDistrictSubscription
+  extends Promise<AsyncIterator<AggregateDistrict>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CommuneSubscriptionPayload {
   mutation: MutationType;
-  node: Profile;
+  node: Commune;
   updatedFields: String[];
-  previousValues: ProfilePreviousValues;
+  previousValues: CommunePreviousValues;
 }
 
-export interface ProfileSubscriptionPayloadPromise
-  extends Promise<ProfileSubscriptionPayload>,
+export interface CommuneSubscriptionPayloadPromise
+  extends Promise<CommuneSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = ProfilePromise>() => T;
+  node: <T = CommunePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProfilePreviousValuesPromise>() => T;
+  previousValues: <T = CommunePreviousValuesPromise>() => T;
 }
 
-export interface ProfileSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProfileSubscriptionPayload>>,
+export interface CommuneSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CommuneSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProfileSubscription>() => T;
+  node: <T = CommuneSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProfilePreviousValuesSubscription>() => T;
+  previousValues: <T = CommunePreviousValuesSubscription>() => T;
 }
+
+export interface CommuneEdge {
+  node: Commune;
+  cursor: String;
+}
+
+export interface CommuneEdgePromise extends Promise<CommuneEdge>, Fragmentable {
+  node: <T = CommunePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CommuneEdgeSubscription
+  extends Promise<AsyncIterator<CommuneEdge>>,
+    Fragmentable {
+  node: <T = CommuneSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CommunePreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface CommunePreviousValuesPromise
+  extends Promise<CommunePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface CommunePreviousValuesSubscription
+  extends Promise<AsyncIterator<CommunePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AddressConnection {
+  pageInfo: PageInfo;
+  edges: AddressEdge[];
+}
+
+export interface AddressConnectionPromise
+  extends Promise<AddressConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AddressEdge>>() => T;
+  aggregate: <T = AggregateAddressPromise>() => T;
+}
+
+export interface AddressConnectionSubscription
+  extends Promise<AsyncIterator<AddressConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AddressEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAddressSubscription>() => T;
+}
+
+export interface Commune {
+  id: ID_Output;
+  name: String;
+}
+
+export interface CommunePromise extends Promise<Commune>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  district: <T = DistrictPromise>() => T;
+}
+
+export interface CommuneSubscription
+  extends Promise<AsyncIterator<Commune>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  district: <T = DistrictSubscription>() => T;
+}
+
+export interface ActivityScheduleConnection {
+  pageInfo: PageInfo;
+  edges: ActivityScheduleEdge[];
+}
+
+export interface ActivityScheduleConnectionPromise
+  extends Promise<ActivityScheduleConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ActivityScheduleEdge>>() => T;
+  aggregate: <T = AggregateActivitySchedulePromise>() => T;
+}
+
+export interface ActivityScheduleConnectionSubscription
+  extends Promise<AsyncIterator<ActivityScheduleConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ActivityScheduleEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateActivityScheduleSubscription>() => T;
+}
+
+export interface DistrictSubscriptionPayload {
+  mutation: MutationType;
+  node: District;
+  updatedFields: String[];
+  previousValues: DistrictPreviousValues;
+}
+
+export interface DistrictSubscriptionPayloadPromise
+  extends Promise<DistrictSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DistrictPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DistrictPreviousValuesPromise>() => T;
+}
+
+export interface DistrictSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DistrictSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DistrictSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DistrictPreviousValuesSubscription>() => T;
+}
+
+export interface ProvinceEdge {
+  node: Province;
+  cursor: String;
+}
+
+export interface ProvinceEdgePromise
+  extends Promise<ProvinceEdge>,
+    Fragmentable {
+  node: <T = ProvincePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProvinceEdgeSubscription
+  extends Promise<AsyncIterator<ProvinceEdge>>,
+    Fragmentable {
+  node: <T = ProvinceSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DistrictPreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface DistrictPreviousValuesPromise
+  extends Promise<DistrictPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface DistrictPreviousValuesSubscription
+  extends Promise<AsyncIterator<DistrictPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GroupConnection {
+  pageInfo: PageInfo;
+  edges: GroupEdge[];
+}
+
+export interface GroupConnectionPromise
+  extends Promise<GroupConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GroupEdge>>() => T;
+  aggregate: <T = AggregateGroupPromise>() => T;
+}
+
+export interface GroupConnectionSubscription
+  extends Promise<AsyncIterator<GroupConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GroupEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGroupSubscription>() => T;
+}
+
+export interface Profile {
+  id: ID_Output;
+  oldId: ID_Output;
+  firstName: String;
+  lastName: String;
+  gender: Boolean;
+  email?: String;
+  facebookId?: String;
+  phoneNumber?: String;
+  birthday?: DateTimeOutput;
+  joinDate?: DateTimeOutput;
+  dayOfBirth?: Int;
+  monthOfBirth?: Int;
+  yearOfBirth?: Int;
+}
+
+export interface ProfilePromise extends Promise<Profile>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  oldId: () => Promise<ID_Output>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  gender: () => Promise<Boolean>;
+  email: () => Promise<String>;
+  facebookId: () => Promise<String>;
+  phoneNumber: () => Promise<String>;
+  birthday: () => Promise<DateTimeOutput>;
+  joinDate: () => Promise<DateTimeOutput>;
+  dayOfBirth: () => Promise<Int>;
+  monthOfBirth: () => Promise<Int>;
+  yearOfBirth: () => Promise<Int>;
+  address: <T = AddressPromise>() => T;
+  hometown: <T = ProvincePromise>() => T;
+  group: <T = GroupPromise>() => T;
+  leader: <T = GroupPromise>() => T;
+  attendances: <T = FragmentableArray<ActivityAttendance>>(args?: {
+    where?: ActivityAttendanceWhereInput;
+    orderBy?: ActivityAttendanceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ProfileSubscription
+  extends Promise<AsyncIterator<Profile>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  oldId: () => Promise<AsyncIterator<ID_Output>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Boolean>>;
+  email: () => Promise<AsyncIterator<String>>;
+  facebookId: () => Promise<AsyncIterator<String>>;
+  phoneNumber: () => Promise<AsyncIterator<String>>;
+  birthday: () => Promise<AsyncIterator<DateTimeOutput>>;
+  joinDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dayOfBirth: () => Promise<AsyncIterator<Int>>;
+  monthOfBirth: () => Promise<AsyncIterator<Int>>;
+  yearOfBirth: () => Promise<AsyncIterator<Int>>;
+  address: <T = AddressSubscription>() => T;
+  hometown: <T = ProvinceSubscription>() => T;
+  group: <T = GroupSubscription>() => T;
+  leader: <T = GroupSubscription>() => T;
+  attendances: <
+    T = Promise<AsyncIterator<ActivityAttendanceSubscription>>
+  >(args?: {
+    where?: ActivityAttendanceWhereInput;
+    orderBy?: ActivityAttendanceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface GroupPreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface GroupPreviousValuesPromise
+  extends Promise<GroupPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface GroupPreviousValuesSubscription
+  extends Promise<AsyncIterator<GroupPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GroupSubscriptionPayload {
+  mutation: MutationType;
+  node: Group;
+  updatedFields: String[];
+  previousValues: GroupPreviousValues;
+}
+
+export interface GroupSubscriptionPayloadPromise
+  extends Promise<GroupSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = GroupPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GroupPreviousValuesPromise>() => T;
+}
+
+export interface GroupSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GroupSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GroupSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GroupPreviousValuesSubscription>() => T;
+}
+
+export interface Address {
+  id: ID_Output;
+  no?: String;
+  street?: String;
+}
+
+export interface AddressPromise extends Promise<Address>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  no: () => Promise<String>;
+  street: () => Promise<String>;
+  commune: <T = CommunePromise>() => T;
+  district: <T = DistrictPromise>() => T;
+  province: <T = ProvincePromise>() => T;
+}
+
+export interface AddressSubscription
+  extends Promise<AsyncIterator<Address>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  no: () => Promise<AsyncIterator<String>>;
+  street: () => Promise<AsyncIterator<String>>;
+  commune: <T = CommuneSubscription>() => T;
+  district: <T = DistrictSubscription>() => T;
+  province: <T = ProvinceSubscription>() => T;
+}
+
+export interface DistrictConnection {
+  pageInfo: PageInfo;
+  edges: DistrictEdge[];
+}
+
+export interface DistrictConnectionPromise
+  extends Promise<DistrictConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DistrictEdge>>() => T;
+  aggregate: <T = AggregateDistrictPromise>() => T;
+}
+
+export interface DistrictConnectionSubscription
+  extends Promise<AsyncIterator<DistrictConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DistrictEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDistrictSubscription>() => T;
+}
+
+export interface ProfileEdge {
+  node: Profile;
+  cursor: String;
+}
+
+export interface ProfileEdgePromise extends Promise<ProfileEdge>, Fragmentable {
+  node: <T = ProfilePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProfileEdgeSubscription
+  extends Promise<AsyncIterator<ProfileEdge>>,
+    Fragmentable {
+  node: <T = ProfileSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActivityListEdge {
+  node: ActivityList;
+  cursor: String;
+}
+
+export interface ActivityListEdgePromise
+  extends Promise<ActivityListEdge>,
+    Fragmentable {
+  node: <T = ActivityListPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ActivityListEdgeSubscription
+  extends Promise<AsyncIterator<ActivityListEdge>>,
+    Fragmentable {
+  node: <T = ActivityListSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateActivitySchedule {
+  count: Int;
+}
+
+export interface AggregateActivitySchedulePromise
+  extends Promise<AggregateActivitySchedule>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateActivityScheduleSubscription
+  extends Promise<AsyncIterator<AggregateActivitySchedule>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateAddress {
+  count: Int;
+}
+
+export interface AggregateAddressPromise
+  extends Promise<AggregateAddress>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAddressSubscription
+  extends Promise<AsyncIterator<AggregateAddress>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
@@ -2198,20 +3715,15 @@ export type Int = number;
 export type Long = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /*
 DateTime scalar input type, allowing Date
@@ -2241,11 +3753,27 @@ export const models: Model[] = [
     embedded: false
   },
   {
+    name: "Address",
+    embedded: false
+  },
+  {
+    name: "Commune",
+    embedded: false
+  },
+  {
+    name: "District",
+    embedded: false
+  },
+  {
     name: "Group",
     embedded: false
   },
   {
     name: "Profile",
+    embedded: false
+  },
+  {
+    name: "Province",
     embedded: false
   }
 ];

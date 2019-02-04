@@ -4,13 +4,47 @@ type Profile {
   firstName: String!
   lastName: String!
   gender: Boolean!
+  email: String
+  facebookId: String
   phoneNumber: String
+  birthday: DateTime
+  joinDate: DateTime
   dayOfBirth: Int
   monthOfBirth: Int
   yearOfBirth: Int
+  address: Address
+  hometown: Province
   group: Group @relation(name: "GroupMembers")
   leader: Group @relation(name: "GroupLeader")
   attendances: [ActivityAttendance] @relation(name: "ProfileAttendance")
+}
+
+type Address {
+  id: ID! @unique
+  no: String
+  street: String
+  commune: Commune
+  district: District
+  province: Province
+}
+
+type Commune {
+  id: ID! @unique
+  name: String!
+  district: District! @relation(name: "CommuneDistrictRef")
+}
+
+type District {
+  id: ID! @unique
+  name: String!
+  communes: [Commune!] @relation(name: "CommuneDistrictRef")
+  province: Province! @relation(name: "DistrictProvinceRef")
+}
+
+type Province {
+  id: ID! @unique
+  name: String!
+  districts: [District!] @relation(name: "DistrictProvinceRef")
 }
 
 type Group {
