@@ -14,10 +14,18 @@ type Profile {
   yearOfBirth: Int
   address: Address
   hometown: Province
+  memberType: MemberType
   group: Group @relation(name: "GroupMembers")
   leader: Group @relation(name: "GroupLeader")
   attendances: [ActivityAttendance] @relation(name: "ProfileAttendance")
 }
+
+type MemberType {
+  id: ID! @unique
+  name: String!
+  profiles: [Profile!]
+}
+
 
 type Address {
   id: ID! @unique

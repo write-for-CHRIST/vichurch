@@ -751,6 +751,10 @@ type AggregateGroup {
   count: Int!
 }
 
+type AggregateMemberType {
+  count: Int!
+}
+
 type AggregateProfile {
   count: Int!
 }
@@ -1383,6 +1387,139 @@ input GroupWhereUniqueInput {
 
 scalar Long
 
+type MemberType {
+  id: ID!
+  name: String!
+  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile!]
+}
+
+type MemberTypeConnection {
+  pageInfo: PageInfo!
+  edges: [MemberTypeEdge]!
+  aggregate: AggregateMemberType!
+}
+
+input MemberTypeCreateInput {
+  name: String!
+  profiles: ProfileCreateManyWithoutMemberTypeInput
+}
+
+input MemberTypeCreateOneWithoutProfilesInput {
+  create: MemberTypeCreateWithoutProfilesInput
+  connect: MemberTypeWhereUniqueInput
+}
+
+input MemberTypeCreateWithoutProfilesInput {
+  name: String!
+}
+
+type MemberTypeEdge {
+  node: MemberType!
+  cursor: String!
+}
+
+enum MemberTypeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MemberTypePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type MemberTypeSubscriptionPayload {
+  mutation: MutationType!
+  node: MemberType
+  updatedFields: [String!]
+  previousValues: MemberTypePreviousValues
+}
+
+input MemberTypeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MemberTypeWhereInput
+  AND: [MemberTypeSubscriptionWhereInput!]
+  OR: [MemberTypeSubscriptionWhereInput!]
+  NOT: [MemberTypeSubscriptionWhereInput!]
+}
+
+input MemberTypeUpdateInput {
+  name: String
+  profiles: ProfileUpdateManyWithoutMemberTypeInput
+}
+
+input MemberTypeUpdateManyMutationInput {
+  name: String
+}
+
+input MemberTypeUpdateOneWithoutProfilesInput {
+  create: MemberTypeCreateWithoutProfilesInput
+  update: MemberTypeUpdateWithoutProfilesDataInput
+  upsert: MemberTypeUpsertWithoutProfilesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: MemberTypeWhereUniqueInput
+}
+
+input MemberTypeUpdateWithoutProfilesDataInput {
+  name: String
+}
+
+input MemberTypeUpsertWithoutProfilesInput {
+  update: MemberTypeUpdateWithoutProfilesDataInput!
+  create: MemberTypeCreateWithoutProfilesInput!
+}
+
+input MemberTypeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  profiles_every: ProfileWhereInput
+  profiles_some: ProfileWhereInput
+  profiles_none: ProfileWhereInput
+  AND: [MemberTypeWhereInput!]
+  OR: [MemberTypeWhereInput!]
+  NOT: [MemberTypeWhereInput!]
+}
+
+input MemberTypeWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createActivityAttendance(data: ActivityAttendanceCreateInput!): ActivityAttendance!
   updateActivityAttendance(data: ActivityAttendanceUpdateInput!, where: ActivityAttendanceWhereUniqueInput!): ActivityAttendance
@@ -1426,6 +1563,12 @@ type Mutation {
   upsertGroup(where: GroupWhereUniqueInput!, create: GroupCreateInput!, update: GroupUpdateInput!): Group!
   deleteGroup(where: GroupWhereUniqueInput!): Group
   deleteManyGroups(where: GroupWhereInput): BatchPayload!
+  createMemberType(data: MemberTypeCreateInput!): MemberType!
+  updateMemberType(data: MemberTypeUpdateInput!, where: MemberTypeWhereUniqueInput!): MemberType
+  updateManyMemberTypes(data: MemberTypeUpdateManyMutationInput!, where: MemberTypeWhereInput): BatchPayload!
+  upsertMemberType(where: MemberTypeWhereUniqueInput!, create: MemberTypeCreateInput!, update: MemberTypeUpdateInput!): MemberType!
+  deleteMemberType(where: MemberTypeWhereUniqueInput!): MemberType
+  deleteManyMemberTypes(where: MemberTypeWhereInput): BatchPayload!
   createProfile(data: ProfileCreateInput!): Profile!
   updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
   updateManyProfiles(data: ProfileUpdateManyMutationInput!, where: ProfileWhereInput): BatchPayload!
@@ -1473,6 +1616,7 @@ type Profile {
   yearOfBirth: Int
   address: Address
   hometown: Province
+  memberType: MemberType
   group: Group
   leader: Group
   attendances(where: ActivityAttendanceWhereInput, orderBy: ActivityAttendanceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivityAttendance!]
@@ -1499,6 +1643,7 @@ input ProfileCreateInput {
   yearOfBirth: Int
   address: AddressCreateOneInput
   hometown: ProvinceCreateOneInput
+  memberType: MemberTypeCreateOneWithoutProfilesInput
   group: GroupCreateOneWithoutMembersInput
   leader: GroupCreateOneWithoutLeaderInput
   attendances: ActivityAttendanceCreateManyWithoutMemberInput
@@ -1506,6 +1651,11 @@ input ProfileCreateInput {
 
 input ProfileCreateManyWithoutGroupInput {
   create: [ProfileCreateWithoutGroupInput!]
+  connect: [ProfileWhereUniqueInput!]
+}
+
+input ProfileCreateManyWithoutMemberTypeInput {
+  create: [ProfileCreateWithoutMemberTypeInput!]
   connect: [ProfileWhereUniqueInput!]
 }
 
@@ -1534,6 +1684,7 @@ input ProfileCreateWithoutAttendancesInput {
   yearOfBirth: Int
   address: AddressCreateOneInput
   hometown: ProvinceCreateOneInput
+  memberType: MemberTypeCreateOneWithoutProfilesInput
   group: GroupCreateOneWithoutMembersInput
   leader: GroupCreateOneWithoutLeaderInput
 }
@@ -1553,6 +1704,7 @@ input ProfileCreateWithoutGroupInput {
   yearOfBirth: Int
   address: AddressCreateOneInput
   hometown: ProvinceCreateOneInput
+  memberType: MemberTypeCreateOneWithoutProfilesInput
   leader: GroupCreateOneWithoutLeaderInput
   attendances: ActivityAttendanceCreateManyWithoutMemberInput
 }
@@ -1572,7 +1724,28 @@ input ProfileCreateWithoutLeaderInput {
   yearOfBirth: Int
   address: AddressCreateOneInput
   hometown: ProvinceCreateOneInput
+  memberType: MemberTypeCreateOneWithoutProfilesInput
   group: GroupCreateOneWithoutMembersInput
+  attendances: ActivityAttendanceCreateManyWithoutMemberInput
+}
+
+input ProfileCreateWithoutMemberTypeInput {
+  oldId: ID!
+  firstName: String!
+  lastName: String!
+  gender: Boolean!
+  email: String
+  facebookId: String
+  phoneNumber: String
+  birthday: DateTime
+  joinDate: DateTime
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  address: AddressCreateOneInput
+  hometown: ProvinceCreateOneInput
+  group: GroupCreateOneWithoutMembersInput
+  leader: GroupCreateOneWithoutLeaderInput
   attendances: ActivityAttendanceCreateManyWithoutMemberInput
 }
 
@@ -1809,6 +1982,7 @@ input ProfileUpdateInput {
   yearOfBirth: Int
   address: AddressUpdateOneInput
   hometown: ProvinceUpdateOneInput
+  memberType: MemberTypeUpdateOneWithoutProfilesInput
   group: GroupUpdateOneWithoutMembersInput
   leader: GroupUpdateOneWithoutLeaderInput
   attendances: ActivityAttendanceUpdateManyWithoutMemberInput
@@ -1855,6 +2029,17 @@ input ProfileUpdateManyWithoutGroupInput {
   updateMany: [ProfileUpdateManyWithWhereNestedInput!]
 }
 
+input ProfileUpdateManyWithoutMemberTypeInput {
+  create: [ProfileCreateWithoutMemberTypeInput!]
+  delete: [ProfileWhereUniqueInput!]
+  connect: [ProfileWhereUniqueInput!]
+  disconnect: [ProfileWhereUniqueInput!]
+  update: [ProfileUpdateWithWhereUniqueWithoutMemberTypeInput!]
+  upsert: [ProfileUpsertWithWhereUniqueWithoutMemberTypeInput!]
+  deleteMany: [ProfileScalarWhereInput!]
+  updateMany: [ProfileUpdateManyWithWhereNestedInput!]
+}
+
 input ProfileUpdateManyWithWhereNestedInput {
   where: ProfileScalarWhereInput!
   data: ProfileUpdateManyDataInput!
@@ -1891,6 +2076,7 @@ input ProfileUpdateWithoutAttendancesDataInput {
   yearOfBirth: Int
   address: AddressUpdateOneInput
   hometown: ProvinceUpdateOneInput
+  memberType: MemberTypeUpdateOneWithoutProfilesInput
   group: GroupUpdateOneWithoutMembersInput
   leader: GroupUpdateOneWithoutLeaderInput
 }
@@ -1910,6 +2096,7 @@ input ProfileUpdateWithoutGroupDataInput {
   yearOfBirth: Int
   address: AddressUpdateOneInput
   hometown: ProvinceUpdateOneInput
+  memberType: MemberTypeUpdateOneWithoutProfilesInput
   leader: GroupUpdateOneWithoutLeaderInput
   attendances: ActivityAttendanceUpdateManyWithoutMemberInput
 }
@@ -1929,13 +2116,39 @@ input ProfileUpdateWithoutLeaderDataInput {
   yearOfBirth: Int
   address: AddressUpdateOneInput
   hometown: ProvinceUpdateOneInput
+  memberType: MemberTypeUpdateOneWithoutProfilesInput
   group: GroupUpdateOneWithoutMembersInput
+  attendances: ActivityAttendanceUpdateManyWithoutMemberInput
+}
+
+input ProfileUpdateWithoutMemberTypeDataInput {
+  oldId: ID
+  firstName: String
+  lastName: String
+  gender: Boolean
+  email: String
+  facebookId: String
+  phoneNumber: String
+  birthday: DateTime
+  joinDate: DateTime
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  address: AddressUpdateOneInput
+  hometown: ProvinceUpdateOneInput
+  group: GroupUpdateOneWithoutMembersInput
+  leader: GroupUpdateOneWithoutLeaderInput
   attendances: ActivityAttendanceUpdateManyWithoutMemberInput
 }
 
 input ProfileUpdateWithWhereUniqueWithoutGroupInput {
   where: ProfileWhereUniqueInput!
   data: ProfileUpdateWithoutGroupDataInput!
+}
+
+input ProfileUpdateWithWhereUniqueWithoutMemberTypeInput {
+  where: ProfileWhereUniqueInput!
+  data: ProfileUpdateWithoutMemberTypeDataInput!
 }
 
 input ProfileUpsertWithoutAttendancesInput {
@@ -1952,6 +2165,12 @@ input ProfileUpsertWithWhereUniqueWithoutGroupInput {
   where: ProfileWhereUniqueInput!
   update: ProfileUpdateWithoutGroupDataInput!
   create: ProfileCreateWithoutGroupInput!
+}
+
+input ProfileUpsertWithWhereUniqueWithoutMemberTypeInput {
+  where: ProfileWhereUniqueInput!
+  update: ProfileUpdateWithoutMemberTypeDataInput!
+  create: ProfileCreateWithoutMemberTypeInput!
 }
 
 input ProfileWhereInput {
@@ -2097,6 +2316,7 @@ input ProfileWhereInput {
   yearOfBirth_gte: Int
   address: AddressWhereInput
   hometown: ProvinceWhereInput
+  memberType: MemberTypeWhereInput
   group: GroupWhereInput
   leader: GroupWhereInput
   attendances_every: ActivityAttendanceWhereInput
@@ -2289,6 +2509,9 @@ type Query {
   group(where: GroupWhereUniqueInput!): Group
   groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group]!
   groupsConnection(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GroupConnection!
+  memberType(where: MemberTypeWhereUniqueInput!): MemberType
+  memberTypes(where: MemberTypeWhereInput, orderBy: MemberTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MemberType]!
+  memberTypesConnection(where: MemberTypeWhereInput, orderBy: MemberTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MemberTypeConnection!
   profile(where: ProfileWhereUniqueInput!): Profile
   profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
   profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
@@ -2306,6 +2529,7 @@ type Subscription {
   commune(where: CommuneSubscriptionWhereInput): CommuneSubscriptionPayload
   district(where: DistrictSubscriptionWhereInput): DistrictSubscriptionPayload
   group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
+  memberType(where: MemberTypeSubscriptionWhereInput): MemberTypeSubscriptionPayload
   profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
   province(where: ProvinceSubscriptionWhereInput): ProvinceSubscriptionPayload
 }
