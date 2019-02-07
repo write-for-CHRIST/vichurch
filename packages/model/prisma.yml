@@ -1,10 +1,13 @@
-endpoint: https://btngd-prisma.app.btngiadinh.com/vichurch-btngiadinh/dev
+endpoint: https://prisma.btngiadinh.com/vichurch-btngiadinh/dev
 datamodel: datamodel.prisma
 secret: $(env:PRISMA_MANAGEMENT_API_SECRET)
 
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
+
+seed:
+  import: seed.graphql
 
 hooks:
   post-deploy:

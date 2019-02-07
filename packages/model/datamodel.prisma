@@ -1,3 +1,12 @@
+type User {
+	id: ID! @unique
+	username: String! @unique
+	password: String!
+	role: Int! @default(value: 2)
+	active: Boolean! @default(value: true)
+	profile: Profile
+}
+
 type Profile {
   id: ID! @unique
   oldId: ID! @unique
@@ -62,7 +71,7 @@ type Group {
   leader: Profile @relation(name: "GroupLeader")
 }
 
-type ActivityList {
+type ActivityType {
   id: ID! @unique
   name: String!
   schedules: [ActivitySchedule] @relation(name: "ActivitySchedule")
@@ -72,7 +81,7 @@ type ActivitySchedule {
   id: ID! @unique
   start: DateTime!
   end: DateTime!
-  activity: ActivityList! @relation(name: "ActivitySchedule")
+  activity: ActivityType! @relation(name: "ActivitySchedule")
   attendances: [ActivityAttendance] @relation(name: "ScheduleAttendance")
 }
 

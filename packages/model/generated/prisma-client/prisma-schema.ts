@@ -116,6 +116,7 @@ input ActivityAttendanceUpdateManyWithoutMemberInput {
   create: [ActivityAttendanceCreateWithoutMemberInput!]
   delete: [ActivityAttendanceWhereUniqueInput!]
   connect: [ActivityAttendanceWhereUniqueInput!]
+  set: [ActivityAttendanceWhereUniqueInput!]
   disconnect: [ActivityAttendanceWhereUniqueInput!]
   update: [ActivityAttendanceUpdateWithWhereUniqueWithoutMemberInput!]
   upsert: [ActivityAttendanceUpsertWithWhereUniqueWithoutMemberInput!]
@@ -127,6 +128,7 @@ input ActivityAttendanceUpdateManyWithoutScheduleInput {
   create: [ActivityAttendanceCreateWithoutScheduleInput!]
   delete: [ActivityAttendanceWhereUniqueInput!]
   connect: [ActivityAttendanceWhereUniqueInput!]
+  set: [ActivityAttendanceWhereUniqueInput!]
   disconnect: [ActivityAttendanceWhereUniqueInput!]
   update: [ActivityAttendanceUpdateWithWhereUniqueWithoutScheduleInput!]
   upsert: [ActivityAttendanceUpsertWithWhereUniqueWithoutScheduleInput!]
@@ -199,142 +201,11 @@ input ActivityAttendanceWhereUniqueInput {
   id: ID
 }
 
-type ActivityList {
-  id: ID!
-  name: String!
-  schedules(where: ActivityScheduleWhereInput, orderBy: ActivityScheduleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivitySchedule!]
-}
-
-type ActivityListConnection {
-  pageInfo: PageInfo!
-  edges: [ActivityListEdge]!
-  aggregate: AggregateActivityList!
-}
-
-input ActivityListCreateInput {
-  name: String!
-  schedules: ActivityScheduleCreateManyWithoutActivityInput
-}
-
-input ActivityListCreateOneWithoutSchedulesInput {
-  create: ActivityListCreateWithoutSchedulesInput
-  connect: ActivityListWhereUniqueInput
-}
-
-input ActivityListCreateWithoutSchedulesInput {
-  name: String!
-}
-
-type ActivityListEdge {
-  node: ActivityList!
-  cursor: String!
-}
-
-enum ActivityListOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type ActivityListPreviousValues {
-  id: ID!
-  name: String!
-}
-
-type ActivityListSubscriptionPayload {
-  mutation: MutationType!
-  node: ActivityList
-  updatedFields: [String!]
-  previousValues: ActivityListPreviousValues
-}
-
-input ActivityListSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ActivityListWhereInput
-  AND: [ActivityListSubscriptionWhereInput!]
-  OR: [ActivityListSubscriptionWhereInput!]
-  NOT: [ActivityListSubscriptionWhereInput!]
-}
-
-input ActivityListUpdateInput {
-  name: String
-  schedules: ActivityScheduleUpdateManyWithoutActivityInput
-}
-
-input ActivityListUpdateManyMutationInput {
-  name: String
-}
-
-input ActivityListUpdateOneRequiredWithoutSchedulesInput {
-  create: ActivityListCreateWithoutSchedulesInput
-  update: ActivityListUpdateWithoutSchedulesDataInput
-  upsert: ActivityListUpsertWithoutSchedulesInput
-  connect: ActivityListWhereUniqueInput
-}
-
-input ActivityListUpdateWithoutSchedulesDataInput {
-  name: String
-}
-
-input ActivityListUpsertWithoutSchedulesInput {
-  update: ActivityListUpdateWithoutSchedulesDataInput!
-  create: ActivityListCreateWithoutSchedulesInput!
-}
-
-input ActivityListWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  schedules_every: ActivityScheduleWhereInput
-  schedules_some: ActivityScheduleWhereInput
-  schedules_none: ActivityScheduleWhereInput
-  AND: [ActivityListWhereInput!]
-  OR: [ActivityListWhereInput!]
-  NOT: [ActivityListWhereInput!]
-}
-
-input ActivityListWhereUniqueInput {
-  id: ID
-}
-
 type ActivitySchedule {
   id: ID!
   start: DateTime!
   end: DateTime!
-  activity: ActivityList!
+  activity: ActivityType!
   attendances(where: ActivityAttendanceWhereInput, orderBy: ActivityAttendanceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivityAttendance!]
 }
 
@@ -347,7 +218,7 @@ type ActivityScheduleConnection {
 input ActivityScheduleCreateInput {
   start: DateTime!
   end: DateTime!
-  activity: ActivityListCreateOneWithoutSchedulesInput!
+  activity: ActivityTypeCreateOneWithoutSchedulesInput!
   attendances: ActivityAttendanceCreateManyWithoutScheduleInput
 }
 
@@ -370,7 +241,7 @@ input ActivityScheduleCreateWithoutActivityInput {
 input ActivityScheduleCreateWithoutAttendancesInput {
   start: DateTime!
   end: DateTime!
-  activity: ActivityListCreateOneWithoutSchedulesInput!
+  activity: ActivityTypeCreateOneWithoutSchedulesInput!
 }
 
 type ActivityScheduleEdge {
@@ -454,7 +325,7 @@ input ActivityScheduleSubscriptionWhereInput {
 input ActivityScheduleUpdateInput {
   start: DateTime
   end: DateTime
-  activity: ActivityListUpdateOneRequiredWithoutSchedulesInput
+  activity: ActivityTypeUpdateOneRequiredWithoutSchedulesInput
   attendances: ActivityAttendanceUpdateManyWithoutScheduleInput
 }
 
@@ -472,6 +343,7 @@ input ActivityScheduleUpdateManyWithoutActivityInput {
   create: [ActivityScheduleCreateWithoutActivityInput!]
   delete: [ActivityScheduleWhereUniqueInput!]
   connect: [ActivityScheduleWhereUniqueInput!]
+  set: [ActivityScheduleWhereUniqueInput!]
   disconnect: [ActivityScheduleWhereUniqueInput!]
   update: [ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput!]
   upsert: [ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput!]
@@ -500,7 +372,7 @@ input ActivityScheduleUpdateWithoutActivityDataInput {
 input ActivityScheduleUpdateWithoutAttendancesDataInput {
   start: DateTime
   end: DateTime
-  activity: ActivityListUpdateOneRequiredWithoutSchedulesInput
+  activity: ActivityTypeUpdateOneRequiredWithoutSchedulesInput
 }
 
 input ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput {
@@ -550,7 +422,7 @@ input ActivityScheduleWhereInput {
   end_lte: DateTime
   end_gt: DateTime
   end_gte: DateTime
-  activity: ActivityListWhereInput
+  activity: ActivityTypeWhereInput
   attendances_every: ActivityAttendanceWhereInput
   attendances_some: ActivityAttendanceWhereInput
   attendances_none: ActivityAttendanceWhereInput
@@ -560,6 +432,137 @@ input ActivityScheduleWhereInput {
 }
 
 input ActivityScheduleWhereUniqueInput {
+  id: ID
+}
+
+type ActivityType {
+  id: ID!
+  name: String!
+  schedules(where: ActivityScheduleWhereInput, orderBy: ActivityScheduleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivitySchedule!]
+}
+
+type ActivityTypeConnection {
+  pageInfo: PageInfo!
+  edges: [ActivityTypeEdge]!
+  aggregate: AggregateActivityType!
+}
+
+input ActivityTypeCreateInput {
+  name: String!
+  schedules: ActivityScheduleCreateManyWithoutActivityInput
+}
+
+input ActivityTypeCreateOneWithoutSchedulesInput {
+  create: ActivityTypeCreateWithoutSchedulesInput
+  connect: ActivityTypeWhereUniqueInput
+}
+
+input ActivityTypeCreateWithoutSchedulesInput {
+  name: String!
+}
+
+type ActivityTypeEdge {
+  node: ActivityType!
+  cursor: String!
+}
+
+enum ActivityTypeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ActivityTypePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type ActivityTypeSubscriptionPayload {
+  mutation: MutationType!
+  node: ActivityType
+  updatedFields: [String!]
+  previousValues: ActivityTypePreviousValues
+}
+
+input ActivityTypeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ActivityTypeWhereInput
+  AND: [ActivityTypeSubscriptionWhereInput!]
+  OR: [ActivityTypeSubscriptionWhereInput!]
+  NOT: [ActivityTypeSubscriptionWhereInput!]
+}
+
+input ActivityTypeUpdateInput {
+  name: String
+  schedules: ActivityScheduleUpdateManyWithoutActivityInput
+}
+
+input ActivityTypeUpdateManyMutationInput {
+  name: String
+}
+
+input ActivityTypeUpdateOneRequiredWithoutSchedulesInput {
+  create: ActivityTypeCreateWithoutSchedulesInput
+  update: ActivityTypeUpdateWithoutSchedulesDataInput
+  upsert: ActivityTypeUpsertWithoutSchedulesInput
+  connect: ActivityTypeWhereUniqueInput
+}
+
+input ActivityTypeUpdateWithoutSchedulesDataInput {
+  name: String
+}
+
+input ActivityTypeUpsertWithoutSchedulesInput {
+  update: ActivityTypeUpdateWithoutSchedulesDataInput!
+  create: ActivityTypeCreateWithoutSchedulesInput!
+}
+
+input ActivityTypeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  schedules_every: ActivityScheduleWhereInput
+  schedules_some: ActivityScheduleWhereInput
+  schedules_none: ActivityScheduleWhereInput
+  AND: [ActivityTypeWhereInput!]
+  OR: [ActivityTypeWhereInput!]
+  NOT: [ActivityTypeWhereInput!]
+}
+
+input ActivityTypeWhereUniqueInput {
   id: ID
 }
 
@@ -727,11 +730,11 @@ type AggregateActivityAttendance {
   count: Int!
 }
 
-type AggregateActivityList {
+type AggregateActivitySchedule {
   count: Int!
 }
 
-type AggregateActivitySchedule {
+type AggregateActivityType {
   count: Int!
 }
 
@@ -760,6 +763,10 @@ type AggregateProfile {
 }
 
 type AggregateProvince {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -893,6 +900,7 @@ input CommuneUpdateManyWithoutDistrictInput {
   create: [CommuneCreateWithoutDistrictInput!]
   delete: [CommuneWhereUniqueInput!]
   connect: [CommuneWhereUniqueInput!]
+  set: [CommuneWhereUniqueInput!]
   disconnect: [CommuneWhereUniqueInput!]
   update: [CommuneUpdateWithWhereUniqueWithoutDistrictInput!]
   upsert: [CommuneUpsertWithWhereUniqueWithoutDistrictInput!]
@@ -1116,6 +1124,7 @@ input DistrictUpdateManyWithoutProvinceInput {
   create: [DistrictCreateWithoutProvinceInput!]
   delete: [DistrictWhereUniqueInput!]
   connect: [DistrictWhereUniqueInput!]
+  set: [DistrictWhereUniqueInput!]
   disconnect: [DistrictWhereUniqueInput!]
   update: [DistrictUpdateWithWhereUniqueWithoutProvinceInput!]
   upsert: [DistrictUpsertWithWhereUniqueWithoutProvinceInput!]
@@ -1528,18 +1537,18 @@ type Mutation {
   upsertActivityAttendance(where: ActivityAttendanceWhereUniqueInput!, create: ActivityAttendanceCreateInput!, update: ActivityAttendanceUpdateInput!): ActivityAttendance!
   deleteActivityAttendance(where: ActivityAttendanceWhereUniqueInput!): ActivityAttendance
   deleteManyActivityAttendances(where: ActivityAttendanceWhereInput): BatchPayload!
-  createActivityList(data: ActivityListCreateInput!): ActivityList!
-  updateActivityList(data: ActivityListUpdateInput!, where: ActivityListWhereUniqueInput!): ActivityList
-  updateManyActivityLists(data: ActivityListUpdateManyMutationInput!, where: ActivityListWhereInput): BatchPayload!
-  upsertActivityList(where: ActivityListWhereUniqueInput!, create: ActivityListCreateInput!, update: ActivityListUpdateInput!): ActivityList!
-  deleteActivityList(where: ActivityListWhereUniqueInput!): ActivityList
-  deleteManyActivityLists(where: ActivityListWhereInput): BatchPayload!
   createActivitySchedule(data: ActivityScheduleCreateInput!): ActivitySchedule!
   updateActivitySchedule(data: ActivityScheduleUpdateInput!, where: ActivityScheduleWhereUniqueInput!): ActivitySchedule
   updateManyActivitySchedules(data: ActivityScheduleUpdateManyMutationInput!, where: ActivityScheduleWhereInput): BatchPayload!
   upsertActivitySchedule(where: ActivityScheduleWhereUniqueInput!, create: ActivityScheduleCreateInput!, update: ActivityScheduleUpdateInput!): ActivitySchedule!
   deleteActivitySchedule(where: ActivityScheduleWhereUniqueInput!): ActivitySchedule
   deleteManyActivitySchedules(where: ActivityScheduleWhereInput): BatchPayload!
+  createActivityType(data: ActivityTypeCreateInput!): ActivityType!
+  updateActivityType(data: ActivityTypeUpdateInput!, where: ActivityTypeWhereUniqueInput!): ActivityType
+  updateManyActivityTypes(data: ActivityTypeUpdateManyMutationInput!, where: ActivityTypeWhereInput): BatchPayload!
+  upsertActivityType(where: ActivityTypeWhereUniqueInput!, create: ActivityTypeCreateInput!, update: ActivityTypeUpdateInput!): ActivityType!
+  deleteActivityType(where: ActivityTypeWhereUniqueInput!): ActivityType
+  deleteManyActivityTypes(where: ActivityTypeWhereInput): BatchPayload!
   createAddress(data: AddressCreateInput!): Address!
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
   updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
@@ -1582,6 +1591,12 @@ type Mutation {
   upsertProvince(where: ProvinceWhereUniqueInput!, create: ProvinceCreateInput!, update: ProvinceUpdateInput!): Province!
   deleteProvince(where: ProvinceWhereUniqueInput!): Province
   deleteManyProvinces(where: ProvinceWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1658,6 +1673,11 @@ input ProfileCreateManyWithoutGroupInput {
 input ProfileCreateManyWithoutMemberTypeInput {
   create: [ProfileCreateWithoutMemberTypeInput!]
   connect: [ProfileWhereUniqueInput!]
+}
+
+input ProfileCreateOneInput {
+  create: ProfileCreateInput
+  connect: ProfileWhereUniqueInput
 }
 
 input ProfileCreateOneWithoutAttendancesInput {
@@ -1968,6 +1988,27 @@ input ProfileSubscriptionWhereInput {
   NOT: [ProfileSubscriptionWhereInput!]
 }
 
+input ProfileUpdateDataInput {
+  oldId: ID
+  firstName: String
+  lastName: String
+  gender: Boolean
+  email: String
+  facebookId: String
+  phoneNumber: String
+  birthday: DateTime
+  joinDate: DateTime
+  dayOfBirth: Int
+  monthOfBirth: Int
+  yearOfBirth: Int
+  address: AddressUpdateOneInput
+  hometown: ProvinceUpdateOneInput
+  memberType: MemberTypeUpdateOneWithoutProfilesInput
+  group: GroupUpdateOneWithoutMembersInput
+  leader: GroupUpdateOneWithoutLeaderInput
+  attendances: ActivityAttendanceUpdateManyWithoutMemberInput
+}
+
 input ProfileUpdateInput {
   oldId: ID
   firstName: String
@@ -2023,6 +2064,7 @@ input ProfileUpdateManyWithoutGroupInput {
   create: [ProfileCreateWithoutGroupInput!]
   delete: [ProfileWhereUniqueInput!]
   connect: [ProfileWhereUniqueInput!]
+  set: [ProfileWhereUniqueInput!]
   disconnect: [ProfileWhereUniqueInput!]
   update: [ProfileUpdateWithWhereUniqueWithoutGroupInput!]
   upsert: [ProfileUpsertWithWhereUniqueWithoutGroupInput!]
@@ -2034,6 +2076,7 @@ input ProfileUpdateManyWithoutMemberTypeInput {
   create: [ProfileCreateWithoutMemberTypeInput!]
   delete: [ProfileWhereUniqueInput!]
   connect: [ProfileWhereUniqueInput!]
+  set: [ProfileWhereUniqueInput!]
   disconnect: [ProfileWhereUniqueInput!]
   update: [ProfileUpdateWithWhereUniqueWithoutMemberTypeInput!]
   upsert: [ProfileUpsertWithWhereUniqueWithoutMemberTypeInput!]
@@ -2044,6 +2087,15 @@ input ProfileUpdateManyWithoutMemberTypeInput {
 input ProfileUpdateManyWithWhereNestedInput {
   where: ProfileScalarWhereInput!
   data: ProfileUpdateManyDataInput!
+}
+
+input ProfileUpdateOneInput {
+  create: ProfileCreateInput
+  update: ProfileUpdateDataInput
+  upsert: ProfileUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ProfileWhereUniqueInput
 }
 
 input ProfileUpdateOneRequiredWithoutAttendancesInput {
@@ -2150,6 +2202,11 @@ input ProfileUpdateWithWhereUniqueWithoutGroupInput {
 input ProfileUpdateWithWhereUniqueWithoutMemberTypeInput {
   where: ProfileWhereUniqueInput!
   data: ProfileUpdateWithoutMemberTypeDataInput!
+}
+
+input ProfileUpsertNestedInput {
+  update: ProfileUpdateDataInput!
+  create: ProfileCreateInput!
 }
 
 input ProfileUpsertWithoutAttendancesInput {
@@ -2492,12 +2549,12 @@ type Query {
   activityAttendance(where: ActivityAttendanceWhereUniqueInput!): ActivityAttendance
   activityAttendances(where: ActivityAttendanceWhereInput, orderBy: ActivityAttendanceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivityAttendance]!
   activityAttendancesConnection(where: ActivityAttendanceWhereInput, orderBy: ActivityAttendanceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityAttendanceConnection!
-  activityList(where: ActivityListWhereUniqueInput!): ActivityList
-  activityLists(where: ActivityListWhereInput, orderBy: ActivityListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivityList]!
-  activityListsConnection(where: ActivityListWhereInput, orderBy: ActivityListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityListConnection!
   activitySchedule(where: ActivityScheduleWhereUniqueInput!): ActivitySchedule
   activitySchedules(where: ActivityScheduleWhereInput, orderBy: ActivityScheduleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivitySchedule]!
   activitySchedulesConnection(where: ActivityScheduleWhereInput, orderBy: ActivityScheduleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityScheduleConnection!
+  activityType(where: ActivityTypeWhereUniqueInput!): ActivityType
+  activityTypes(where: ActivityTypeWhereInput, orderBy: ActivityTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ActivityType]!
+  activityTypesConnection(where: ActivityTypeWhereInput, orderBy: ActivityTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityTypeConnection!
   address(where: AddressWhereUniqueInput!): Address
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
@@ -2519,13 +2576,16 @@ type Query {
   province(where: ProvinceWhereUniqueInput!): Province
   provinces(where: ProvinceWhereInput, orderBy: ProvinceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Province]!
   provincesConnection(where: ProvinceWhereInput, orderBy: ProvinceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinceConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
   activityAttendance(where: ActivityAttendanceSubscriptionWhereInput): ActivityAttendanceSubscriptionPayload
-  activityList(where: ActivityListSubscriptionWhereInput): ActivityListSubscriptionPayload
   activitySchedule(where: ActivityScheduleSubscriptionWhereInput): ActivityScheduleSubscriptionPayload
+  activityType(where: ActivityTypeSubscriptionWhereInput): ActivityTypeSubscriptionPayload
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
   commune(where: CommuneSubscriptionWhereInput): CommuneSubscriptionPayload
   district(where: DistrictSubscriptionWhereInput): DistrictSubscriptionPayload
@@ -2533,5 +2593,156 @@ type Subscription {
   memberType(where: MemberTypeSubscriptionWhereInput): MemberTypeSubscriptionPayload
   profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
   province(where: ProvinceSubscriptionWhereInput): ProvinceSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  role: Int!
+  active: Boolean!
+  profile: Profile
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  role: Int
+  active: Boolean
+  profile: ProfileCreateOneInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  role_ASC
+  role_DESC
+  active_ASC
+  active_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  username: String!
+  password: String!
+  role: Int!
+  active: Boolean!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  username: String
+  password: String
+  role: Int
+  active: Boolean
+  profile: ProfileUpdateOneInput
+}
+
+input UserUpdateManyMutationInput {
+  username: String
+  password: String
+  role: Int
+  active: Boolean
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  role: Int
+  role_not: Int
+  role_in: [Int!]
+  role_not_in: [Int!]
+  role_lt: Int
+  role_lte: Int
+  role_gt: Int
+  role_gte: Int
+  active: Boolean
+  active_not: Boolean
+  profile: ProfileWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  username: String
 }
 `
