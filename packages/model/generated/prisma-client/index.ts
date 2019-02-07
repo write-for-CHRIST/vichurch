@@ -1173,6 +1173,7 @@ export interface ProvinceUpdateOneRequiredWithoutDistrictsInput {
 
 export type MemberTypeWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  name?: String;
 }>;
 
 export interface ProvinceUpdateWithoutDistrictsDataInput {
@@ -4154,7 +4155,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `https://graph.btngiadinh.com/vichurch-btngiadinh/dev`,
+  endpoint: `https://btngd-prisma.app.btngiadinh.com/vichurch-btngiadinh/dev`,
   secret: `$(env:PRISMA_MANAGEMENT_API_SECRET)`
 });
 export const prisma = new Prisma();

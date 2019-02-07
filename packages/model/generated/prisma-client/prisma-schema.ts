@@ -1518,6 +1518,7 @@ input MemberTypeWhereInput {
 
 input MemberTypeWhereUniqueInput {
   id: ID
+  name: String
 }
 
 type Mutation {

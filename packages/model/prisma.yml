@@ -1,4 +1,4 @@
-endpoint: https://graph.btngiadinh.com/vichurch-btngiadinh/dev
+endpoint: https://btngd-prisma.app.btngiadinh.com/vichurch-btngiadinh/dev
 datamodel: datamodel.prisma
 secret: $(env:PRISMA_MANAGEMENT_API_SECRET)
 

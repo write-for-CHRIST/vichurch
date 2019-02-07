@@ -22,7 +22,7 @@ type Profile {
 
 type MemberType {
   id: ID! @unique
-  name: String!
+  name: String! @unique
   profiles: [Profile!]
 }
 
