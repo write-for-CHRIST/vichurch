@@ -16,11 +16,11 @@
     "release": "yarn run build && yarn publish"
   },
   "dependencies": {
-    "graphql": "14.1.1",
+    "graphql": "14.7.0",
     "prisma-client-lib": "1.25.3"
   },
   "devDependencies": {
-    "@types/graphql": "14.0.5",
+    "@types/graphql": "14.2.3",
     "@types/ws": "6.0.1",
     "ts-node": "8.0.2",
     "typescript": "3.2.4"
