@@ -24,7 +24,7 @@
     "@types/react-native": "0.57.23",
     "@types/react-navigation": "3.0.1",
     "@types/react-primitives": "0.6.2",
-    "@types/react-test-renderer": "16.0.3",
+    "@types/react-test-renderer": "16.9.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
     "husky": "1.2.1",
